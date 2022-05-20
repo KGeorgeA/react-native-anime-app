@@ -3,14 +3,14 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { Button } from 'react-native';
 
 import Ionicons from 'react-native-vector-icons/Ionicons';
-import CardList from '../CardsList';
-import Map from '../BlankComponents/Map';
-import Search from '../BlankComponents/Search';
-import Comments from '../BlankComponents/Comments';
-import Notifications from '../BlankComponents/Notifications';
+import CardList from '../../screens/CardsList/CardList';
+import Map from '../../screens/BlankComponents/Map';
+import CameraScreen from '../../screens/CameraScreen/CameraScreen';
+import Search from '../../screens/BlankComponents/Search';
+import Comments from '../../screens/BlankComponents/Comments';
+import Notifications from '../../screens/BlankComponents/Notifications';
 
 import { MainStackParamsList } from '../../utils/types';
-import CameraScreen from '../CameraScreen/CameraScreen';
 
 const Tab = createBottomTabNavigator<MainStackParamsList>();
 
@@ -21,33 +21,33 @@ const Main: React.FC = () => {
         tabBarIcon: ({ focused, color, size }) => {
           const icons = {
             CardList: {
-              focudes: 'home',
+              focused: 'home',
               main: 'home-outline',
             },
             Map: {
-              focudes: 'compass',
+              focused: 'compass',
               main: 'compass-outline',
             },
             Camera: {
-              focudes: 'camera',
+              focused: 'camera',
               main: 'camera-outline',
             },
             Search: {
-              focudes: 'search',
+              focused: 'search',
               main: 'search-outline',
             },
             Comments: {
-              focudes: 'chatbubbles',
+              focused: 'chatbubbles',
               main: 'chatbubbles-outline',
             },
             Notifications: {
-              focudes: 'notifications',
+              focused: 'notifications',
               main: 'notifications-outline',
             },
           };
 
           const icon = icons[route.name];
-          return <Ionicons name={focused ? icon.focudes : icon.main} size={size} color={color} />;
+          return <Ionicons name={focused ? icon.focused : icon.main} size={size} color={color} />;
         },
         tabBarActiveTintColor: '#109CEB',
         tabBarInactiveTintColor: 'gray',

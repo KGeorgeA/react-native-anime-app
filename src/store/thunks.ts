@@ -18,7 +18,7 @@ export const getAnimes = createAsyncThunk<
   void,
   GetParams | undefined,
   { dispatch: AppDispatch }
->('ghibli/getAnimes', async (params = { limit: 25, page: 1 }, { dispatch }) => {
+>('posts/getAnimes', async (params = { limit: 25, page: 1 }, { dispatch }) => {
   try {
     dispatch(toggleRefresh(true));
 
@@ -41,7 +41,7 @@ export const getMoreAnimes = createAsyncThunk<
     dispatch: AppDispatch,
     state: RootState,
   }
->('ghibli/getMoreAnimes', async (params, { dispatch, getState }) => {
+>('posts/getMoreAnimes', async (params, { dispatch, getState }) => {
   try {
     const { apiPagination, films } = getState().posts;
 
@@ -53,7 +53,7 @@ export const getMoreAnimes = createAsyncThunk<
         },
       } = await getList({page: apiPagination.current_page + 1, limit: 25});
 
-      console.log({pagination, apiPagination});
+      // console.log({pagination, apiPagination});
 
       dispatch(updateCurrentPage(pagination.current_page));
       dispatch(updateItemsCount(pagination.items.count + apiPagination.items.count));
@@ -65,7 +65,7 @@ export const getMoreAnimes = createAsyncThunk<
 });
 
 export const getAnime = createAsyncThunk(
-  'ghibli/getOneAnime',
+  'posts/getOneAnime',
   async (id: number, { dispatch }) => {
     try {
       const { data: { data } } = await getOne(id);

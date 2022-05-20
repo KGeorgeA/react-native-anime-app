@@ -21,9 +21,6 @@ const CardList: React.FC = () => {
   useFocusEffect(
     useCallback(() => {
       dispatch(thunks.getAnimes());
-      return () => {
-        dispatch(updatePosts([]));
-      };
     }, [dispatch]),
   );
 

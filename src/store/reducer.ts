@@ -15,7 +15,7 @@ const initialState: State = {
 };
 
 const postsSlice = createSlice({
-  name: 'ghibli',
+  name: 'posts',
   initialState,
   reducers: {
     updatePosts: (state, { payload }) => {

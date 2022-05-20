@@ -5,7 +5,7 @@ import { Provider } from 'react-redux';
 import { Camera, CameraPermissionStatus } from 'react-native-vision-camera';
 
 import Login from './src/screens/Login';
-import Main from './src/screens/Main';
+import Main from './src/navigation/Main';
 import Anime from './src/screens/Anime';
 
 import { store } from './src/store/store';
@@ -28,7 +28,7 @@ const App: React.FC = () => {
   return (
     <Provider store={store}>
       <NavigationContainer>
-        <RootStack.Navigator initialRouteName="Login">
+        <RootStack.Navigator initialRouteName="Main">
           <RootStack.Screen
             name="Login"
             component={Login}

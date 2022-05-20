@@ -6,6 +6,7 @@ const customAxios = axios.create({
 
 // customAxios.interceptors.request.use(request => request);
 customAxios.interceptors.response.use(
+  undefined,
   (err) => {
     // eslint-disable-next-line no-console
     console.log('ALLO OSHIBKA', err);
