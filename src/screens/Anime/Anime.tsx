@@ -1,7 +1,7 @@
 import React from 'react';
 import { useFocusEffect } from '@react-navigation/native';
-import { ScrollView, View, StyleSheet, Text } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
+import { SafeAreaView, ScrollView, View, StyleSheet, Text } from 'react-native';
+// import { SafeAreaView } from 'react-native-safe-area-context';
 
 import Loading from '../Loading/Loading';
 import CustomCarousel from './components/Carousel';
