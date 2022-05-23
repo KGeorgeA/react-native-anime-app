@@ -11,21 +11,21 @@ const Card: React.FC<CardProps> = ({ item, navigate }) => {
   };
 
   return (
-    <View style={style.container}>
+    <View style={styles.container}>
       <TouchableOpacity onPress={handleOnItemPress}>
-        <View style={style.cardContainer}>
-          <View style={style.imageContainer}>
-            <Image source={{ uri: item.images.jpg.image_url }} style={style.image} />
+        <View style={styles.cardContainer}>
+          <View style={styles.imageContainer}>
+            <Image source={{ uri: item.images.jpg.image_url }} style={styles.image} />
           </View>
 
-          <View style={style.infoContainer}>
+          <View style={styles.infoContainer}>
             <View>
-              <View style={style.titleContainer}>
-                <Text style={[style.text, style.titleText]}>{item.title}</Text>
+              <View style={styles.titleContainer}>
+                <Text style={[styles.text, styles.titleText]}>{item.title}</Text>
               </View>
 
-              <View style={style.directorContainer}>
-                <Text style={[style.text, style.directorText]}>
+              <View style={styles.directorContainer}>
+                <Text style={[styles.text, styles.directorText]}>
                   by {item.producers.map((producer, index) => (
                     index === item.producers.length - 1
                       ? `${producer.name}`
@@ -36,18 +36,18 @@ const Card: React.FC<CardProps> = ({ item, navigate }) => {
             </View>
 
             <View>
-              <View style={style.labelsContainer}>
+              <View style={styles.labelsContainer}>
                 {item.genres.map((genre, index) => {
                   return (
-                    <View key={`index=${index}`} style={style.labelContainer}>
-                      <Text style={style.labelText}>{genre.name}</Text>
+                    <View key={`index=${index}`} style={styles.labelContainer}>
+                      <Text style={styles.labelText}>{genre.name}</Text>
                     </View>
                   );
                 })}
               </View>
 
-              <View style={style.commentsContainer}>
-                <Ionicons name="chatbubbles" size={16} color="#109CEB" style={style.commentsIcon}/>
+              <View style={styles.commentsContainer}>
+                <Ionicons name="chatbubbles" size={16} color="#109CEB" style={styles.commentsIcon}/>
 
                 <Text>
                   {Math.ceil(Math.random() * 1000)} Comments
@@ -61,7 +61,7 @@ const Card: React.FC<CardProps> = ({ item, navigate }) => {
   );
 };
 
-const style = StyleSheet.create({
+const styles = StyleSheet.create({
   container: {
     paddingTop: 8,
     marginHorizontal: 8,

@@ -9,8 +9,8 @@ const Login: React.FC = () => {
   const [isButtonDisabled, setIsButtonDisabled] = useState<boolean>(true);
 
   return (
-    <SafeAreaView style={style.iosContainer}>
-      <View style={style.container}>
+    <SafeAreaView style={styles.iosContainer}>
+      <View style={styles.container}>
         <AppLogo />
         <InputFields setIsButtonDisabled={setIsButtonDisabled} />
         <SigninButton isButtonDisabled={isButtonDisabled} />
@@ -20,7 +20,7 @@ const Login: React.FC = () => {
   );
 };
 
-const style = StyleSheet.create({
+const styles = StyleSheet.create({
   iosContainer: {
     flex: 1,
   },

@@ -41,10 +41,10 @@ const InputFields: React.FC<{
   };
 
   return (
-    <View style={style.container}>
-      <View style={style.inputsContainer}>
+    <View style={styles.container}>
+      <View style={styles.inputsContainer}>
         <TextInput
-          style={style.input}
+          style={styles.input}
           placeholder="USERNAME"
           autoCorrect={false}
           value={userName}
@@ -52,7 +52,7 @@ const InputFields: React.FC<{
         />
 
         <TextInput
-          style={style.input}
+          style={styles.input}
           placeholder="PASSWORD"
           secureTextEntry
           autoCorrect={false}
@@ -68,13 +68,13 @@ const InputFields: React.FC<{
             'Totoro do not remember your password(',
           )
         }>
-        <Text style={style.text}>forgot password</Text>
+        <Text style={styles.text}>forgot password</Text>
       </TouchableOpacity>
     </View>
   );
 };
 
-const style = StyleSheet.create({
+const styles = StyleSheet.create({
   container: {
     height: 100,
   },

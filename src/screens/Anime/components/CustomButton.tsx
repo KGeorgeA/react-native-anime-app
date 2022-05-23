@@ -8,16 +8,16 @@ const CustomButton: React.FC<CustomButtonProps> = (props) => {
   const { iconName, iconColor = '#fff', iconSize = 18, buttonText } = props;
 
   return (
-    <TouchableOpacity style={style.touchableOpacity}>
-      <View style={style.touchableButtons}>
+    <TouchableOpacity style={styles.touchableOpacity}>
+      <View style={styles.touchableButtons}>
         <Ionicons name={iconName} size={iconSize} color={iconColor} />
-        <Text style={style.touchableText}>{buttonText}</Text>
+        <Text style={styles.touchableText}>{buttonText}</Text>
       </View>
     </TouchableOpacity>
   );
 };
 
-const style = StyleSheet.create({
+const styles = StyleSheet.create({
   touchableOpacity: {
     marginRight: 10,
   },

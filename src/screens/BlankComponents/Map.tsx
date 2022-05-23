@@ -1,15 +1,15 @@
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 
-const Map = () => {
+const Map: React.FC = () => {
   return (
-    <View style={style.container}>
+    <View style={styles.container}>
       <Text>Imagine a map of the nearest cinemas here</Text>
     </View>
   );
 };
 
-const style = StyleSheet.create({
+const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: 'center',

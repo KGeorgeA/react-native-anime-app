@@ -3,12 +3,12 @@ import React from 'react';
 
 const Loading = () => {
   return (
-    <View style={style.emptyList}>
+    <View style={styles.emptyList}>
       <ActivityIndicator size="large" color="#109CEB" />
     </View>
   );
 };
-const style = StyleSheet.create({
+const styles = StyleSheet.create({
   emptyList: {
     flex: 1,
     justifyContent: 'center',

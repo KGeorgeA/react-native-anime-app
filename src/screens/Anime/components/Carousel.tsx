@@ -22,14 +22,14 @@ const CustomCarousel: React.FC<CustomCarouselProps> = ({ imageUrl }) => {
 
   const renderItem = useCallback(({ item }: RenderItemProps) => {
     return (
-      <View style={style.sliderContainer}>
-        <Image source={{ uri: item.imageUrl }} style={style.image} />
+      <View style={styles.sliderContainer}>
+        <Image source={{ uri: item.imageUrl }} style={styles.image} />
       </View>
     );
   }, []);
 
   return (
-    <View style={style.container}>
+    <View style={styles.container}>
       <Carousel
         layout="default"
         // loop
@@ -49,8 +49,8 @@ const CustomCarousel: React.FC<CustomCarouselProps> = ({ imageUrl }) => {
       <Pagination
         dotsLength={carouselItems.length}
         activeDotIndex={activeIndex}
-        containerStyle={style.paginationContainer}
-        dotStyle={style.paginationDot}
+        containerStyle={styles.paginationContainer}
+        dotStyle={styles.paginationDot}
         inactiveDotOpacity={0.4}
         inactiveDotScale={0.6}
         tappableDots
@@ -60,7 +60,7 @@ const CustomCarousel: React.FC<CustomCarouselProps> = ({ imageUrl }) => {
   );
 };
 
-const style = StyleSheet.create({
+const styles = StyleSheet.create({
   container: {
     flex: 2,
   },

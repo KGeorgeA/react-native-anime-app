@@ -1,32 +1,46 @@
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
-import { ReactNode } from 'react';
+
+// export type RootStackParamsList = {
+//   Login: undefined;
+//   Main: MainStackParamsList | undefined;
+//   Anime: {
+//     animeId: number;
+//   };
+// };
 
 export type RootStackParamsList = {
+  Auth: AuthStackParamsList;
+  Main: MainStackParamsList;
+}
+
+export type AuthStackParamsList = {
   Login: undefined;
-  Main: MainStackParamsList | undefined;
-  Anime: {
-    animeId: number;
-  };
-  Modal: {
-    children: ReactNode;
-    isShown: boolean;
-    extraProps?: unknown[];
-  }
-};
+  // SignIn: undefined;
+  // SignUp: {
+  //   token: string;
+  // };
+}
 
 export type MainStackParamsList = {
-  CardList: undefined;
+  List: undefined;
   Map: undefined;
   Search: undefined;
   Comments: undefined;
   Notifications: undefined;
-  Camera: {
+  Media: {
     isCameraPermission: boolean;
   };
 };
 
+export type ListStackParamsList = {
+  CardList: undefined;
+  Anime: {
+    animeId: number;
+  };
+}
+
 export type AnimeScreenProp = NativeStackNavigationProp<
-  RootStackParamsList,
+  ListStackParamsList,
   'Anime'
 >;
 

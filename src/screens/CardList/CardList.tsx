@@ -45,8 +45,8 @@ const CardList: React.FC = () => {
   }
 
   return (
-    <View style={style.container}>
-      <View style={style.flatList}>
+    <View style={styles.container}>
+      <View style={styles.flatList}>
         <FlatList
           keyExtractor={(item) => item.mal_id.toString()}
           data={films}
@@ -62,7 +62,7 @@ const CardList: React.FC = () => {
   );
 };
 
-const style = StyleSheet.create({
+const styles = StyleSheet.create({
   container: {
     flex: 1,
     height: '100%',

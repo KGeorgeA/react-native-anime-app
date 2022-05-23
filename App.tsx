@@ -5,12 +5,10 @@ import { Provider } from 'react-redux';
 import { Camera, CameraPermissionStatus } from 'react-native-vision-camera';
 
 import Login from './src/screens/Login';
-import Main from './src/screens/Main';
-import Anime from './src/screens/Anime';
+import Main from './src/navigation/Main';
 
 import { store } from './src/store/store';
 import { RootStackParamsList } from './src/utils/types';
-import Modal from './src/screens/Modal/Modal';
 
 const RootStack = createNativeStackNavigator<RootStackParamsList>();
 
@@ -28,9 +26,9 @@ const App: React.FC = () => {
   return (
     <Provider store={store}>
       <NavigationContainer>
-        <RootStack.Navigator initialRouteName="Login">
+        <RootStack.Navigator initialRouteName="Auth">
           <RootStack.Screen
-            name="Login"
+            name="Auth"
             component={Login}
             options={{ headerShown: false }}
           />
@@ -38,18 +36,6 @@ const App: React.FC = () => {
           <RootStack.Screen
             name="Main"
             component={Main}
-            options={{ headerShown: false }}
-          />
-
-          <RootStack.Screen
-            name="Anime"
-            component={Anime}
-            options={{ headerShown: false }}
-          />
-
-          <RootStack.Screen
-            name="Modal"
-            component={Modal}
             options={{ headerShown: false }}
           />
         </RootStack.Navigator>

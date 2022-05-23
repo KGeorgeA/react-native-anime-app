@@ -1,7 +1,6 @@
 import React from 'react';
-import { useFocusEffect } from '@react-navigation/native';
+import { RouteProp, useFocusEffect } from '@react-navigation/native';
 import { SafeAreaView, ScrollView, View, StyleSheet, Text } from 'react-native';
-// import { SafeAreaView } from 'react-native-safe-area-context';
 
 import Loading from '../Loading/Loading';
 import CustomCarousel from './components/Carousel';
@@ -10,15 +9,18 @@ import CustomButton from './components/CustomButton';
 import { useAppDispatch, useAppSelector } from '../../utils/hooks';
 import thunks from '../../store/thunks';
 import { updateCurrentAnime } from '../../store/reducer';
+import { ListStackParamsList } from '../../utils/types';
 
-const Anime: React.FC<{
-  route: {
-    params: {
-      animeId: number;
-    };
-  };
-}> = (props) => {
-  const { animeId } = props.route.params;
+// const Anime: React.FC<{
+//   route: {
+//     params: {
+//       animeId: number;
+//     };
+//   };
+// }> = (props) => {
+//   const { animeId } = props.route.params;
+const Anime: React.FC<{ route: RouteProp<ListStackParamsList, 'Anime'> }> = (props) => {
+const animeId = props.route.params.animeId;
 
   const dispatch = useAppDispatch();
   const currentAnime = useAppSelector((posts) => posts.posts.currentAnime);
@@ -35,14 +37,14 @@ const Anime: React.FC<{
   }
 
   return (
-    <SafeAreaView style={style.iosContainer}>
-      <View style={style.container}>
+    <SafeAreaView style={styles.iosContainer}>
+      <View style={styles.container}>
         <CustomCarousel imageUrl={currentAnime.images.jpg.image_url} />
 
-        <View style={style.infoContainer}>
-          <Text style={style.titleText}>{currentAnime.title}</Text>
+        <View style={styles.infoContainer}>
+          <Text style={styles.titleText}>{currentAnime.title}</Text>
 
-          <Text style={style.directorText}>by {
+          <Text style={styles.directorText}>by {
             currentAnime.producers.map((producer, index) => (
               index === currentAnime.producers.length - 1
                 ? `${producer.name}`
@@ -50,14 +52,14 @@ const Anime: React.FC<{
             ))}
           </Text>
 
-          <View style={style.touchableActions}>
+          <View style={styles.touchableActions}>
             <CustomButton iconColor="#fff" iconName="thumbs-up" iconSize={18} buttonText="like" />
 
             <CustomButton iconColor="#fff" iconName="chatbox" iconSize={18} buttonText="comment" />
           </View>
 
           <ScrollView>
-            <Text style={style.description}>{currentAnime.synopsis}</Text>
+            <Text style={styles.description}>{currentAnime.synopsis}</Text>
           </ScrollView>
         </View>
       </View>
@@ -65,7 +67,7 @@ const Anime: React.FC<{
   );
 };
 
-const style = StyleSheet.create({
+const styles = StyleSheet.create({
   iosContainer: {
     flex: 1,
   },

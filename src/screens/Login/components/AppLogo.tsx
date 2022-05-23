@@ -11,11 +11,11 @@ const AppLogo: React.FC = () => {
   const logoImageUri = 'https://i.pinimg.com/750x/18/e3/4e/18e34e354c421ffb316f25d96d7673f8.jpg';
 
   return (
-    <View style={style.logoContainer}>
+    <View style={styles.logoContainer}>
       <TouchableWithoutFeedback
         onLongPress={() => Linking.openURL('https://myanimelist.net/')}>
         <Image
-          style={style.image}
+          style={styles.image}
           source={{ uri: logoImageUri }}
         />
       </TouchableWithoutFeedback>
@@ -23,7 +23,7 @@ const AppLogo: React.FC = () => {
   );
 };
 
-const style = StyleSheet.create({
+const styles = StyleSheet.create({
   logoContainer: {
     justifyContent: 'center',
     width: 230,

@@ -3,11 +3,11 @@ import { StyleSheet, View } from 'react-native';
 
 const Separator: React.FC = () => {
   return (
-    <View style={style.separator}/>
+    <View style={styles.separator}/>
   );
 };
 
-const style = StyleSheet.create({
+const styles = StyleSheet.create({
   separator: {
     marginTop: 10,
     height: 1,

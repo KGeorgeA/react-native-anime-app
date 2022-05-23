@@ -10,22 +10,22 @@ const SigninButton: React.FC<{ isButtonDisabled: boolean }> = ({ isButtonDisable
   const handleButtonPress = () => navigation.navigate('Main');
 
   return (
-    <View style={style.container}>
+    <View style={styles.container}>
       <TouchableOpacity
         style={[
-          style.button,
-          isButtonDisabled ? style.buttonDisabled : style.buttonEnabled,
+          styles.button,
+          isButtonDisabled ? styles.buttonDisabled : styles.buttonEnabled,
         ]}
         disabled={isButtonDisabled}
         onPress={handleButtonPress}
       >
-        <Text style={style.text}>sign in</Text>
+        <Text style={styles.text}>sign in</Text>
       </TouchableOpacity>
     </View>
   );
 };
 
-const style = StyleSheet.create({
+const styles = StyleSheet.create({
   container: {},
   button: {
     width: 200,
