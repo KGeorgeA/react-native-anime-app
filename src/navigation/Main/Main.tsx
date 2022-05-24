@@ -8,15 +8,16 @@ import Map from '../../screens/BlankComponents/Map';
 import Search from '../../screens/BlankComponents/Search';
 import Comments from '../../screens/BlankComponents/Comments';
 import Notifications from '../../screens/BlankComponents/Notifications';
-import MediaScreen from '../../screens/Media';
 
 import { MainStackParamsList } from '../../utils/types';
+import MediaNavigation from '../Media/MediaNavigation';
 
 const Tab = createBottomTabNavigator<MainStackParamsList>();
 
 const Main: React.FC = () => {
   return (
     <Tab.Navigator
+      initialRouteName="List"
       screenOptions={({ route }) => ({
         tabBarIcon: ({ focused, color, size }) => {
           const icons = {
@@ -77,7 +78,7 @@ const Main: React.FC = () => {
 
       <Tab.Screen
         name="Media"
-        component={MediaScreen}
+        component={MediaNavigation}
         options={{ title: 'Media' }}
       />
 

@@ -1,18 +1,20 @@
 import React from 'react';
-import { StyleSheet, View } from 'react-native';
+import { View } from 'react-native';
 
-const Separator: React.FC = () => {
-  return (
-    <View style={styles.separator}/>
-  );
+type SeparatorProps = {
+  marginTop?: string | number;
+  backgroundColor?: string;
+  height?: string | number;
 };
 
-const styles = StyleSheet.create({
-  separator: {
-    marginTop: 10,
-    height: 1,
-    backgroundColor: '#d8d8d8',
-  },
-});
+const Separator: React.FC<SeparatorProps> = ({
+  marginTop = 10,
+  backgroundColor = '#d8d8d8',
+  height = 1,
+}) => {
+  return (
+    <View style={{ marginTop, backgroundColor, height }}/>
+  );
+};
 
 export default Separator;

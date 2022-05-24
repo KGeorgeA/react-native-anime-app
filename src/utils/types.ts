@@ -1,16 +1,9 @@
-import { NativeStackNavigationProp } from '@react-navigation/native-stack';
-
-// export type RootStackParamsList = {
-//   Login: undefined;
-//   Main: MainStackParamsList | undefined;
-//   Anime: {
-//     animeId: number;
-//   };
-// };
+import type { NavigatorScreenParams } from '@react-navigation/native';
+import type { NativeStackNavigationProp } from '@react-navigation/native-stack';
 
 export type RootStackParamsList = {
   Auth: AuthStackParamsList;
-  Main: MainStackParamsList;
+  Main: NavigatorScreenParams<MainStackParamsList> | undefined;
 }
 
 export type AuthStackParamsList = {
@@ -22,14 +15,12 @@ export type AuthStackParamsList = {
 }
 
 export type MainStackParamsList = {
-  List: undefined;
+  List: NavigatorScreenParams<ListStackParamsList> | undefined;
   Map: undefined;
   Search: undefined;
   Comments: undefined;
   Notifications: undefined;
-  Media: {
-    isCameraPermission: boolean;
-  };
+  Media: NavigatorScreenParams<MediaStackParamsList> | undefined;
 };
 
 export type ListStackParamsList = {
@@ -37,6 +28,12 @@ export type ListStackParamsList = {
   Anime: {
     animeId: number;
   };
+}
+
+export type MediaStackParamsList = {
+  PermissionScreen: undefined;
+  MediaScreen: undefined;
+  CameraScreen: undefined;
 }
 
 export type AnimeScreenProp = NativeStackNavigationProp<
@@ -90,7 +87,7 @@ export type OrderEnum = 'mal_id'
 
 export type CardProps = {
   item: Anime;
-  navigate: any;
+  navigate: () => void;
 };
 
 export interface RenderedItemProps {
@@ -184,3 +181,13 @@ type AnimeNestedRelationType = Array<{
   name: string;
   url: string;
 }>;
+
+export type AnimePagination = {
+  last_visible_page: number;
+  has_next_page: boolean;
+  items?: {
+    count: number;
+    total: number;
+    per_page: number;
+  }
+}

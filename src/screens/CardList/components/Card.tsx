@@ -1,7 +1,8 @@
-import React, { memo } from 'react';
-import { View, Text, Image, StyleSheet, TouchableOpacity } from 'react-native';
+import React, { memo, useMemo } from 'react';
+import { View, Text, Image, TouchableOpacity } from 'react-native';
 
 import Ionicons from 'react-native-vector-icons/Ionicons';
+import styles from './Card.styles';
 
 import { CardProps } from '../../../utils/types';
 
@@ -9,6 +10,8 @@ const Card: React.FC<CardProps> = ({ item, navigate }) => {
   const handleOnItemPress = () => {
     navigate();
   };
+
+  const commentsCount = useMemo(() => Math.ceil(Math.random() * 1000), []);
 
   return (
     <View style={styles.container}>
@@ -50,7 +53,7 @@ const Card: React.FC<CardProps> = ({ item, navigate }) => {
                 <Ionicons name="chatbubbles" size={16} color="#109CEB" style={styles.commentsIcon}/>
 
                 <Text>
-                  {Math.ceil(Math.random() * 1000)} Comments
+                  {commentsCount} Comments
                 </Text>
               </View>
             </View>
@@ -60,62 +63,5 @@ const Card: React.FC<CardProps> = ({ item, navigate }) => {
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    paddingTop: 8,
-    marginHorizontal: 8,
-  },
-  cardContainer: {
-    flexDirection: 'row',
-  },
-  imageContainer: {
-    flex: 2,
-    backgroundColor: '#cfebfc',
-  },
-  infoContainer: {
-    flex: 3,  // 3 / 4
-    paddingHorizontal: 8,
-    justifyContent: 'space-between',
-  },
-  image: {
-    resizeMode: 'contain',
-    height: 150,
-  },
-  titleContainer: {},
-  titleText: {},
-  directorContainer: {},
-  directorText: {
-    color: '#3faef3',
-    fontSize: 13,
-  },
-  labelsContainer: {
-    flexDirection: 'row',
-    flexWrap: 'wrap',
-    marginBottom: 10,
-  },
-  labelContainer: {
-    width: '45%',
-    paddingRight: 2,
-    backgroundColor: '#109CEB',
-    borderRadius: 4,
-    marginRight: 5,
-    marginBottom: 5,
-  },
-  labelText: {
-    color: 'white',
-    textAlign: 'center',
-  },
-  commentsContainer: {
-    flexDirection: 'row',
-    alignContent: 'center',
-  },
-  commentsIcon: {
-    marginRight: 5,
-  },
-  text: {
-    fontSize: 15,
-  },
-});
 
 export default memo(Card);

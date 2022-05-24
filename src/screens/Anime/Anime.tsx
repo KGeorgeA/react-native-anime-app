@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import { RouteProp, useFocusEffect } from '@react-navigation/native';
-import { SafeAreaView, ScrollView, View, StyleSheet, Text } from 'react-native';
+import { SafeAreaView, ScrollView, View, Text } from 'react-native';
 
-import Loading from '../Loading/Loading';
+import styles from './Anime.styles';
+import Loader from '../Loader/Loader';
 import CustomCarousel from './components/Carousel';
 import CustomButton from './components/CustomButton';
 
@@ -11,29 +12,21 @@ import thunks from '../../store/thunks';
 import { updateCurrentAnime } from '../../store/reducer';
 import { ListStackParamsList } from '../../utils/types';
 
-// const Anime: React.FC<{
-//   route: {
-//     params: {
-//       animeId: number;
-//     };
-//   };
-// }> = (props) => {
-//   const { animeId } = props.route.params;
 const Anime: React.FC<{ route: RouteProp<ListStackParamsList, 'Anime'> }> = (props) => {
-const animeId = props.route.params.animeId;
+  const animeId = props.route.params.animeId;
 
   const dispatch = useAppDispatch();
   const currentAnime = useAppSelector((posts) => posts.posts.currentAnime);
 
   useFocusEffect(
-    React.useCallback(() => {
+    useCallback(() => {
       dispatch(thunks.getAnime(animeId));
       return () => dispatch(updateCurrentAnime(null));
     }, [dispatch, animeId]),
   );
 
   if (!currentAnime) {
-    return <Loading />;
+    return <Loader />;
   }
 
   return (
@@ -66,49 +59,5 @@ const animeId = props.route.params.animeId;
     </SafeAreaView>
   );
 };
-
-const styles = StyleSheet.create({
-  iosContainer: {
-    flex: 1,
-  },
-  container: {
-    flex: 1,
-  },
-  infoContainer: {
-    flex: 3,
-    marginTop: 5,
-    paddingHorizontal: 20,
-  },
-  titleText: {
-    fontSize: 20,
-  },
-  directorText: {
-    marginTop: 15,
-    fontSize: 12,
-    color: '#3faef3',
-  },
-  touchableActions: {
-    flexDirection: 'row',
-    padding: 15,
-  },
-  touchableOpacity: {
-    marginRight: 10,
-  },
-  touchableButtons: {
-    flexDirection: 'row',
-    backgroundColor: '#109CEB',
-    borderRadius: 3,
-    padding: 5,
-  },
-  touchableText: {
-    color: '#fff',
-    textTransform: 'capitalize',
-    marginLeft: 5,
-  },
-  description: {
-    fontSize: 15,
-    textAlign: 'justify',
-  },
-});
 
 export default Anime;

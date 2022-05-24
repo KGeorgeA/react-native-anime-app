@@ -4,11 +4,11 @@ const customAxios = axios.create({
   baseURL: 'https://api.jikan.moe/v4',
 });
 
-// customAxios.interceptors.request.use(request => request);
 customAxios.interceptors.response.use(
+  (data) => data,
   (err) => {
     // eslint-disable-next-line no-console
-    console.log('ALLO OSHIBKA', err);
+    console.log('OSHIBKA', err);
     throw err;
   },
 );

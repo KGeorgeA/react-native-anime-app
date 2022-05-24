@@ -1,7 +1,9 @@
 import React from 'react';
-import { View, StyleSheet, Text, TouchableOpacity } from 'react-native';
+import { View, Text, TouchableOpacity } from 'react-native';
 
 import Ionicons from 'react-native-vector-icons/Ionicons';
+import styles from './CusstomButton.styles';
+
 import { CustomButtonProps } from '../../../utils/types';
 
 const CustomButton: React.FC<CustomButtonProps> = (props) => {
@@ -16,22 +18,5 @@ const CustomButton: React.FC<CustomButtonProps> = (props) => {
     </TouchableOpacity>
   );
 };
-
-const styles = StyleSheet.create({
-  touchableOpacity: {
-    marginRight: 10,
-  },
-  touchableButtons: {
-    flexDirection: 'row',
-    backgroundColor: '#109CEB',
-    borderRadius: 3,
-    padding: 5,
-  },
-  touchableText: {
-    color: '#fff',
-    textTransform: 'capitalize',
-    marginLeft: 5,
-  },
-});
 
 export default CustomButton;

@@ -1,7 +1,7 @@
-import { Anime, GetParams } from '../utils/types';
+import { Anime, AnimePagination, GetParams } from '../utils/types';
 
 import axios from './axios';
 
 export default (params?: GetParams) => {
-  return axios.get<{ data: Anime[], pagination: any }>('/anime', { params });
+  return axios.get<{ data: Anime[], pagination: AnimePagination }>('/anime', { params });
 };

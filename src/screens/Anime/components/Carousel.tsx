@@ -1,7 +1,8 @@
 import React, { useState, useCallback, useRef } from 'react';
-import { View, Image, StyleSheet, Dimensions } from 'react-native';
+import { View, Image, Dimensions } from 'react-native';
 
 import Carousel, { Pagination } from 'react-native-snap-carousel';
+import styles from './Carousel.styles';
 
 interface ItemProps {
   imageUrl: string;
@@ -32,9 +33,6 @@ const CustomCarousel: React.FC<CustomCarouselProps> = ({ imageUrl }) => {
     <View style={styles.container}>
       <Carousel
         layout="default"
-        // loop
-        // enableSnap
-        // loopClonesPerSide={3}
         autoplay
         autoplayDelay={5000}
         autoplayInterval={5000}
@@ -53,35 +51,9 @@ const CustomCarousel: React.FC<CustomCarouselProps> = ({ imageUrl }) => {
         dotStyle={styles.paginationDot}
         inactiveDotOpacity={0.4}
         inactiveDotScale={0.6}
-        tappableDots
-        carouselRef={carouselRef.current}
       />
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 2,
-  },
-  sliderContainer: {
-    flex: 1,
-  },
-  image: {
-    flex: 1,
-    resizeMode: 'contain',
-    height: '100%',
-  },
-  paginationContainer: {
-    paddingVertical: 5,
-  },
-  paginationDot: {
-    width: 8,
-    height: 8,
-    borderRadius: 5,
-    marginHorizontal: 8,
-    backgroundColor: 'rgba(0, 0, 0, 0.75)',
-  },
-});
 
 export default CustomCarousel;

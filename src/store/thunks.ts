@@ -53,8 +53,6 @@ export const getMoreAnimes = createAsyncThunk<
         },
       } = await getList({page: apiPagination.current_page + 1, limit: 25});
 
-      console.log({pagination, apiPagination});
-
       dispatch(updateCurrentPage(pagination.current_page));
       dispatch(updateItemsCount(pagination.items.count + apiPagination.items.count));
       dispatch(updatePosts(films.concat(data)));

@@ -11,6 +11,7 @@
     "lint:fix": "./node_modules/.bin/eslint . -c .eslintrc.js --quiet --fix --ext .js,.jsx,.ts,.tsx"
   },
   "dependencies": {
+    "@react-native-community/cameraroll": "^4.1.2",
     "@react-navigation/bottom-tabs": "^6.3.1",
     "@react-navigation/native": "^6.0.10",
     "@react-navigation/native-stack": "^6.6.2",
@@ -27,7 +28,7 @@
     "react-native-screens": "^3.13.1",
     "react-native-snap-carousel": "^3.9.1",
     "react-native-vector-icons": "^9.1.0",
-    "react-native-vision-camera": "^2.10.0",
+    "react-native-vision-camera": "2.10.0",
     "react-redux": "^8.0.1"
   },
   "devDependencies": {

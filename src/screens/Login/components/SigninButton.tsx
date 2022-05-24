@@ -1,13 +1,16 @@
 import React from 'react';
-import { StyleSheet, View, TouchableOpacity, Text } from 'react-native';
+import { View, TouchableOpacity, Text } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
+import type { NativeStackNavigationProp } from '@react-navigation/native-stack';
 
-import { MainScreenProp } from '../../../utils/types';
+import styles from './SigninButton.styles';
+
+import { RootStackParamsList } from '../../../utils/types';
 
 const SigninButton: React.FC<{ isButtonDisabled: boolean }> = ({ isButtonDisabled }) => {
-  const navigation = useNavigation<MainScreenProp>();
+  const navigation = useNavigation<NativeStackNavigationProp<RootStackParamsList>>();
 
-  const handleButtonPress = () => navigation.navigate('Main');
+  const handleButtonPress = () => navigation.replace('Main', { screen: 'List' });
 
   return (
     <View style={styles.container}>
@@ -24,26 +27,5 @@ const SigninButton: React.FC<{ isButtonDisabled: boolean }> = ({ isButtonDisable
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {},
-  button: {
-    width: 200,
-    borderRadius: 100,
-    height: 35,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  buttonEnabled: {
-    backgroundColor: '#109CEB',
-  },
-  buttonDisabled: {
-    backgroundColor: '#d8d8d8',
-  },
-  text: {
-    textTransform: 'uppercase',
-    color: 'white',
-  },
-});
 
 export default SigninButton;

@@ -1,10 +1,11 @@
 import React, { useCallback } from 'react';
-import { StyleSheet, View, FlatList } from 'react-native';
+import { View, FlatList } from 'react-native';
 import { useFocusEffect, useNavigation } from '@react-navigation/native';
 
+import styles from './CardList.styles';
 import Card from './components/Card';
 import Separator from './components/Separator';
-import Loading from '../Loading/Loading';
+import Loader from '../Loader/Loader';
 
 import { useAppDispatch, useAppSelector } from '../../utils/hooks';
 import thunks from '../../store/thunks';
@@ -41,7 +42,7 @@ const CardList: React.FC = () => {
   const handleRefresh = () => dispatch(thunks.getAnimes({ limit: 25, page: 1 }));
 
   if (!films.length) {
-    return <Loading />;
+    return <Loader />;
   }
 
   return (
@@ -56,23 +57,11 @@ const CardList: React.FC = () => {
           ItemSeparatorComponent={Separator}
           onEndReachedThreshold={1}
           onEndReached={handleEndReached}
+          ListFooterComponent={<Loader />}
         />
       </View>
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    height: '100%',
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'space-around',
-  },
-  flatList: {
-    width: '100%',
-  },
-});
 
 export default CardList;
