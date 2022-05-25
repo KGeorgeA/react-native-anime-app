@@ -4,7 +4,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import CardList from '../../screens/CardList';
 import Anime from '../../screens/Anime';
 
-import { ListStackParamsList } from '../../utils/types';
+import type { ListStackParamsList } from '../../utils/types';
 
 const RootStack = createNativeStackNavigator<ListStackParamsList>();
 

@@ -9,8 +9,8 @@ export default StyleSheet.create({
   },
   flatListItem: {
     flex: 1,
-    width: 500,
-    height: 500,
+    width: 200,
+    height: 200,
   },
   flatListItemImage: {
     flex: 1,

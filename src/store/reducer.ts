@@ -1,6 +1,6 @@
 /* eslint-disable no-param-reassign */
 import { createSlice } from '@reduxjs/toolkit';
-import { State } from '../utils/types';
+import type { State } from '../utils/types';
 
 const initialState: State = {
   films: [],

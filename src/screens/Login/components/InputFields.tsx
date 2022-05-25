@@ -2,19 +2,19 @@ import React, { useCallback, useEffect, useState } from 'react';
 import {
   View,
   Text,
-  TextInput,
   TouchableOpacity,
   Alert,
 } from 'react-native';
 import { useFocusEffect } from '@react-navigation/native';
 
+import TextInputs from '../../../ui/components/TextInputs';
 import styles from './InputFields.styles';
 
 const InputFields: React.FC<{
   setIsButtonDisabled: React.Dispatch<React.SetStateAction<boolean>>;
 }> = ({ setIsButtonDisabled }) => {
-  const [userName, setUserName] = useState<string>('');
-  const [password, setPassword] = useState<string>('');
+  const [userName, setUserName] = useState('');
+  const [password, setPassword] = useState('');
 
   useFocusEffect(
     useCallback(() => {
@@ -43,24 +43,23 @@ const InputFields: React.FC<{
 
   return (
     <View style={styles.container}>
-      <View style={styles.inputsContainer}>
-        <TextInput
-          style={styles.input}
-          placeholder="USERNAME"
-          autoCorrect={false}
-          value={userName}
-          onChangeText={handleUserNameChange}
-        />
-
-        <TextInput
-          style={styles.input}
-          placeholder="PASSWORD"
-          secureTextEntry
-          autoCorrect={false}
-          value={password}
-          onChangeText={handlePasswordChange}
-        />
-      </View>
+      <TextInputs
+        textInputPropsArray={[{
+            style: styles.input,
+            placeholder: 'USERNAME',
+            autoCorrect: false,
+            value: userName,
+            onChangeText: handleUserNameChange,
+          }, {
+            style: styles.input,
+            placeholder: 'PASSWORD',
+            secureTextEntry: true,
+            autoCorrect: false,
+            value: password,
+            onChangeText: handlePasswordChange,
+        }]}
+        inputsContainerStyles={styles.inputsContainer}
+      />
 
       <TouchableOpacity
         onPress={() =>

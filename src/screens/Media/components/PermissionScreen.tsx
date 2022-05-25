@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useState, useEffect } from 'react';
 import { Linking, View, Text } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { Camera, CameraPermissionStatus } from 'react-native-vision-camera';
@@ -6,7 +6,7 @@ import type { NativeStackNavigationProp } from '@react-navigation/native-stack';
 
 import styles from './PermissionScreen.styles';
 
-import { RootStackParamsList } from '../../../utils/types';
+import type { RootStackParamsList } from '../../../utils/types';
 
 const PermissionScreen: React.FC = (): React.ReactElement => {
   const navigation = useNavigation<NativeStackNavigationProp<RootStackParamsList>>();
@@ -34,7 +34,7 @@ const PermissionScreen: React.FC = (): React.ReactElement => {
     setCameraPermissionStatus(permission);
   }, []);
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (
       cameraPermissionStatus === 'authorized' &&
       microphonePermissionStatus === 'authorized'

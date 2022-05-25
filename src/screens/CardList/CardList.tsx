@@ -10,7 +10,7 @@ import Loader from '../Loader/Loader';
 import { useAppDispatch, useAppSelector } from '../../utils/hooks';
 import thunks from '../../store/thunks';
 import { updatePosts } from '../../store/reducer';
-import { AnimeScreenProp, RenderedItemProps } from '../../utils/types';
+import type { AnimeScreenProp, RenderedItemProps } from '../../utils/types';
 
 const CardList: React.FC = () => {
   const navigation = useNavigation<AnimeScreenProp>();

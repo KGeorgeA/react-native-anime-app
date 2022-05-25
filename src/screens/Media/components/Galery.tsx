@@ -28,6 +28,8 @@ const Galery: React.FC<{flatListData: CameraRoll.PhotoIdentifier[]}> = ({ flatLi
           keyExtractor={(item, index) => `${item.node.image.filename}+${index}`}
           data={flatListData}
           renderItem={renderItem}
+          horizontal={false}
+          numColumns={4}
         />
       </View>
   );

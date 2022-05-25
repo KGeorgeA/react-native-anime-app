@@ -47,7 +47,7 @@ const MediaScreen: React.FC = () => {
     try {
       const hasPermission = await requestReadPermission();
       if (!hasPermission) return [];
-      CameraRoll.getPhotos({ first: 5 }).then((items) => setFlatListItems(items.edges));
+      CameraRoll.getPhotos({ first: 12 }).then((items) => setFlatListItems(items.edges));
     } catch (error) {
       console.log(error);
     }

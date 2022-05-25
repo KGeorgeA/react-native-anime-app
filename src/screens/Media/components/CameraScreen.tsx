@@ -11,6 +11,13 @@ import {
 import CameraRoll from '@react-native-community/cameraroll';
 import { useIsFocused } from '@react-navigation/native';
 import { Camera, useCameraDevices } from 'react-native-vision-camera';
+import Animated, {
+  useSharedValue,
+  useAnimatedStyle,
+  withRepeat,
+  withTiming,
+  withSequence,
+} from 'react-native-reanimated';
 
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import styles from './CameraScreen.styles';
@@ -35,6 +42,21 @@ const requestSavePermission = async (): Promise<boolean> => {
 };
 
 const CameraScreen: React.FC = () => {
+  const captureButtonRotation = useSharedValue(0);
+  const screenOpacity = useSharedValue(1);
+
+  const animatedCaptureButtonStyle = useAnimatedStyle(() => {
+    return {
+      transform: [{ rotateZ: `${captureButtonRotation.value}deg` }],
+    };
+  });
+
+  const animatedScreenOpacityStyle = useAnimatedStyle(() => {
+    return {
+      opacity: screenOpacity.value,
+    };
+  });
+
   const [cameraPosition, setCameraPosition] = useState<'front' | 'back'>('back');
   const camera = useRef<Camera>(null);
 
@@ -42,10 +64,22 @@ const CameraScreen: React.FC = () => {
   const device = devices[cameraPosition];
 
   const isFocussed = useIsFocused();
-  const isActive = isFocussed;
+  const isActive = isFocussed;  // + foreground? later
 
   const handleCameraCapture = async () => {
     try {
+      captureButtonRotation.value = withSequence(
+        withTiming(-10, { duration: 50 }),
+        withRepeat(withTiming(10, { duration: 100 }), 6, true),
+        withTiming(0, { duration: 50 }),
+      );
+
+      // does not work
+      screenOpacity.value = withSequence(
+        withTiming(0.5, { duration: 50 }),
+        withTiming(1, { duration: 50 }),
+      );
+
       const savePermission = await requestSavePermission();
 
       if (!savePermission) return null;
@@ -80,7 +114,7 @@ const CameraScreen: React.FC = () => {
         <Camera
           ref={camera}
           photo
-          style={StyleSheet.absoluteFill}
+          style={[animatedScreenOpacityStyle, StyleSheet.absoluteFill]}
           device={device}
           isActive={isActive}
         />
@@ -89,13 +123,13 @@ const CameraScreen: React.FC = () => {
       <TouchableWithoutFeedback
         onPress={handleCameraCapture}
       >
-        <View style={styles.captureIconContainer}>
+        <Animated.View style={[styles.captureIconContainer, animatedCaptureButtonStyle]}>
           <Ionicons
             name="aperture-outline"
             size={100}
             color="white"
           />
-        </View>
+        </Animated.View>
       </TouchableWithoutFeedback>
 
       <TouchableWithoutFeedback

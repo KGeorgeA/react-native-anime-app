@@ -10,7 +10,7 @@ import CustomButton from './components/CustomButton';
 import { useAppDispatch, useAppSelector } from '../../utils/hooks';
 import thunks from '../../store/thunks';
 import { updateCurrentAnime } from '../../store/reducer';
-import { ListStackParamsList } from '../../utils/types';
+import type { ListStackParamsList } from '../../utils/types';
 
 const Anime: React.FC<{ route: RouteProp<ListStackParamsList, 'Anime'> }> = (props) => {
   const animeId = props.route.params.animeId;

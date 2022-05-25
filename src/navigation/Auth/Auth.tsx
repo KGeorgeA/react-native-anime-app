@@ -3,7 +3,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 import Login from '../../screens/Login';
 
-import { AuthStackParamsList } from '../../utils/types';
+import type { AuthStackParamsList } from '../../utils/types';
 
 const RootStack = createNativeStackNavigator<AuthStackParamsList>();
 

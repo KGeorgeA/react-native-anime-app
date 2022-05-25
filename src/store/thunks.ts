@@ -12,7 +12,7 @@ import {
 } from './reducer';
 import getList from '../api/getList';
 import getOne from '../api/getOne';
-import { GetParams } from '../utils/types';
+import type { GetParams } from '../utils/types';
 
 export const getAnimes = createAsyncThunk<
   void,

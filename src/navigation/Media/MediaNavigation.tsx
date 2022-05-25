@@ -5,7 +5,7 @@ import MediaScreen from '../../screens/Media/MediaScreen';
 import PermissionScreen from '../../screens/Media/components/PermissionScreen';
 import CameraScreen from '../../screens/Media/components/CameraScreen';
 
-import { MediaStackParamsList } from '../../utils/types';
+import type { MediaStackParamsList } from '../../utils/types';
 
 const RootStack = createNativeStackNavigator<MediaStackParamsList>();
 

@@ -9,7 +9,7 @@ import Search from '../../screens/BlankComponents/Search';
 import Comments from '../../screens/BlankComponents/Comments';
 import Notifications from '../../screens/BlankComponents/Notifications';
 
-import { MainStackParamsList } from '../../utils/types';
+import type { MainStackParamsList } from '../../utils/types';
 import MediaNavigation from '../Media/MediaNavigation';
 
 const Tab = createBottomTabNavigator<MainStackParamsList>();

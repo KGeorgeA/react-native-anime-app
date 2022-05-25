@@ -7,7 +7,7 @@ import {
 import Main from './Main';
 import Login from '../screens/Login';
 
-import { RootStackParamsList } from '../utils/types';
+import type { RootStackParamsList } from '../utils/types';
 
 const RootStack = createNativeStackNavigator<RootStackParamsList>();
 

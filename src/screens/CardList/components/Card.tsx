@@ -4,7 +4,7 @@ import { View, Text, Image, TouchableOpacity } from 'react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import styles from './Card.styles';
 
-import { CardProps } from '../../../utils/types';
+import type { CardProps } from '../../../utils/types';
 
 const Card: React.FC<CardProps> = ({ item, navigate }) => {
   const handleOnItemPress = () => {
