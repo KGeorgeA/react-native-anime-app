@@ -2,13 +2,16 @@ import React, { memo, useMemo } from 'react';
 import { View, Text, Image, TouchableOpacity } from 'react-native';
 
 import Ionicons from 'react-native-vector-icons/Ionicons';
+import { useNavigation } from '@react-navigation/native';
 import styles from './Card.styles';
 
-import type { CardProps } from '../../../utils/types';
+import type { Anime, AnimeScreenProp } from '../../../utils/types';
 
-const Card: React.FC<CardProps> = ({ item, navigate }) => {
+const Card: React.FC<{item: Anime}> = ({ item }) => {
+  const navigation = useNavigation<AnimeScreenProp>();
+
   const handleOnItemPress = () => {
-    navigate();
+    navigation.navigate('Anime', { animeId: item.mal_id });
   };
 
   const commentsCount = useMemo(() => Math.ceil(Math.random() * 1000), []);

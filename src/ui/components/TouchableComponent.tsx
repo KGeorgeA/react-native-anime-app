@@ -2,13 +2,13 @@ import React, { ReactNode } from 'react';
 import { View, TouchableOpacity } from 'react-native';
 import type { ViewProps, TouchableOpacityProps } from 'react-native';
 
-type TouchableComponentType = {
-  touchableOpacityProps: TouchableOpacityProps;
+export type TouchableComponentPropsType = {
+  touchableOpacityProps?: TouchableOpacityProps;
   viewProps?: ViewProps;
-  children: ReactNode;
+  children?: ReactNode;
 }
 
-const TouchableComponent: React.FC<TouchableComponentType> = ({
+const TouchableComponent: React.FC<TouchableComponentPropsType> = ({
   touchableOpacityProps,
   viewProps,
   children,

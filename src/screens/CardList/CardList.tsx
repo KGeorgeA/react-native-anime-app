@@ -1,6 +1,6 @@
-import React, { useCallback } from 'react';
+import React, { useCallback, useMemo } from 'react';
 import { View, FlatList } from 'react-native';
-import { useFocusEffect, useNavigation } from '@react-navigation/native';
+import { useFocusEffect } from '@react-navigation/native';
 
 import styles from './CardList.styles';
 import Card from './components/Card';
@@ -10,10 +10,11 @@ import Loader from '../Loader/Loader';
 import { useAppDispatch, useAppSelector } from '../../utils/hooks';
 import thunks from '../../store/thunks';
 import { updatePosts } from '../../store/reducer';
-import type { AnimeScreenProp, RenderedItemProps } from '../../utils/types';
+import type { RenderedItemProps } from '../../utils/types';
+
+const renderItem = ({ item }: RenderedItemProps) => <Card item={item} />;
 
 const CardList: React.FC = () => {
-  const navigation = useNavigation<AnimeScreenProp>();
   const dispatch = useAppDispatch();
   const films = useAppSelector((state) => state.posts.films);
   const refresh = useAppSelector((state) => state.posts.refresh);
@@ -27,15 +28,6 @@ const CardList: React.FC = () => {
       };
     }, [dispatch]),
   );
-
-  const renderItem = ({ item }: RenderedItemProps) => {
-    return (
-      <Card
-        item={item}
-        navigate={() => navigation.navigate('Anime', { animeId: item.mal_id })}
-      />
-    );
-  };
 
   const handleEndReached = () => dispatch(thunks.getMoreAnimes(page));
 
@@ -51,6 +43,7 @@ const CardList: React.FC = () => {
         <FlatList
           keyExtractor={(item) => item.mal_id.toString()}
           data={films}
+          removeClippedSubviews
           renderItem={renderItem}
           refreshing={refresh}
           onRefresh={handleRefresh}

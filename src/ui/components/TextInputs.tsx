@@ -2,12 +2,12 @@ import React, { memo } from 'react';
 import { View, TextInput } from 'react-native';
 import type { StyleProp, ViewStyle, TextInputProps } from 'react-native';
 
-type TextInputsType = {
+type TextInputsPropsType = {
   textInputPropsArray: TextInputProps[],
   inputsContainerStyles?: StyleProp<ViewStyle>;
 }
 
-const TextInputs: React.FC<TextInputsType> = ({
+const TextInputs: React.FC<TextInputsPropsType> = ({
   inputsContainerStyles,
   textInputPropsArray,
 }) => {

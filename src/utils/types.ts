@@ -87,7 +87,6 @@ export type OrderEnum = 'mal_id'
 
 export type CardProps = {
   item: Anime;
-  navigate: () => void;
 };
 
 export interface RenderedItemProps {
