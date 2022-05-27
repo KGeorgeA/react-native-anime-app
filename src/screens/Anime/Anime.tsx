@@ -28,33 +28,48 @@ const Anime: React.FC<{ route: RouteProp<ListStackParamsList, 'Anime'> }> = (pro
   if (!currentAnime) {
     return <Loader />;
   }
+  // asdasdasdl;aksdhal;skddhkaklsdhalskdhalksdgajsdgaskjdglaskgdajklsgdajgsdlagsdjagsdkjgasjdgasldgasdjagsflkhv1lj2hvlkjgkjagsdglasfgaskjfgaklgwqlghslkga;sfgas;fg
 
   return (
     <SafeAreaView style={styles.iosContainer}>
       <View style={styles.container}>
-        <CustomCarousel imageUrl={currentAnime.images.jpg.image_url} />
+        <ScrollView>
+          <CustomCarousel imageUrl={currentAnime.images.jpg.image_url} />
 
-        <View style={styles.infoContainer}>
-          <Text style={styles.titleText}>{currentAnime.title}</Text>
+          <View style={styles.infoContainer}>
+            <Text style={styles.titleText}>
+              {currentAnime.title}
+            </Text>
 
-          <Text style={styles.directorText}>by {
-            currentAnime.producers.map((producer, index) => (
-              index === currentAnime.producers.length - 1
-                ? `${producer.name}`
-                : `${producer.name}, `
-            ))}
-          </Text>
+            <Text style={styles.directorText}>
+              by {currentAnime.producers.map((producer, index) => (
+                index === currentAnime.producers.length - 1
+                  ? `${producer.name}`
+                  : `${producer.name}, `
+              ))}
+            </Text>
 
-          <View style={styles.touchableActions}>
-            <CustomButton iconColor="#fff" iconName="thumbs-up" iconSize={18} buttonText="like" />
+            <View style={styles.touchableActions}>
+              <CustomButton
+                iconColor="#fff"
+                iconName="thumbs-up"
+                iconSize={18}
+                buttonText="like"
+              />
 
-            <CustomButton iconColor="#fff" iconName="chatbox" iconSize={18} buttonText="comment" />
+              <CustomButton
+                iconColor="#fff"
+                iconName="chatbox"
+                iconSize={18}
+                buttonText="comment"
+              />
+            </View>
+
+            <Text style={styles.description}>
+              {currentAnime.synopsis}
+            </Text>
           </View>
-
-          <ScrollView>
-            <Text style={styles.description}>{currentAnime.synopsis}</Text>
-          </ScrollView>
-        </View>
+        </ScrollView>
       </View>
     </SafeAreaView>
   );

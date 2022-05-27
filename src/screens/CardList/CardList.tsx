@@ -1,6 +1,5 @@
-import React, { useCallback, useMemo } from 'react';
+import React, { useEffect } from 'react';
 import { View, FlatList } from 'react-native';
-import { useFocusEffect } from '@react-navigation/native';
 
 import styles from './CardList.styles';
 import Card from './components/Card';
@@ -9,7 +8,6 @@ import Loader from '../Loader/Loader';
 
 import { useAppDispatch, useAppSelector } from '../../utils/hooks';
 import thunks from '../../store/thunks';
-import { updatePosts } from '../../store/reducer';
 import type { RenderedItemProps } from '../../utils/types';
 
 const renderItem = ({ item }: RenderedItemProps) => <Card item={item} />;
@@ -20,14 +18,9 @@ const CardList: React.FC = () => {
   const refresh = useAppSelector((state) => state.posts.refresh);
   const page = useAppSelector((state) => state.posts.apiPagination.current_page);
 
-  useFocusEffect(
-    useCallback(() => {
-      dispatch(thunks.getAnimes());
-      return () => {
-        dispatch(updatePosts([]));
-      };
-    }, [dispatch]),
-  );
+  useEffect(() => {
+    dispatch(thunks.getAnimes());
+  }, [dispatch]);
 
   const handleEndReached = () => dispatch(thunks.getMoreAnimes(page));
 

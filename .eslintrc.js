@@ -49,7 +49,11 @@ module.exports = {
     'import/no-extraneous-dependencies': 'off',
     'padded-blocks': ['error', 'never'],
     'no-multiple-empty-lines': ['error'],
-    'max-len': ['error', { comments: 100, code: 100 }],
+    'max-len': ['error', {
+      code: 100,
+      ignoreComments: true,
+      ignoreUrls: true,
+    }],
     'default-param-last': 0,
   },
 };
