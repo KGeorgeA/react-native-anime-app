@@ -1,6 +1,5 @@
 import React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { Button } from 'react-native';
 
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import List from '../List/List';
@@ -11,10 +10,19 @@ import Notifications from '../../screens/BlankComponents/Notifications';
 
 import type { MainStackParamsList } from '../../utils/types';
 import MediaNavigation from '../Media/MediaNavigation';
+import CustomButton from '../../ui/components/CustomButton';
+import { useAppDispatch } from '../../utils/hooks';
+import { toggleFilterDrawerView } from '../../store/reducer';
 
 const Tab = createBottomTabNavigator<MainStackParamsList>();
 
 const Main: React.FC = () => {
+  const dispatch = useAppDispatch();
+
+  const toggleFilterDrawer = () => {
+    dispatch(toggleFilterDrawerView());
+  };
+
   return (
     <Tab.Navigator
       initialRouteName="List"
@@ -64,8 +72,27 @@ const Main: React.FC = () => {
         options={{
           title: 'List',
           headerRight: () => (
-            // eslint-disable-next-line no-console
-            <Button title="Filter" color="#109CEB" onPress={() => console.log('hi')} />
+            <CustomButton
+              buttonText="Filters"
+              touchableComponentProps={{
+                touchableOpacityProps: {
+                  onPress: toggleFilterDrawer,
+                  style: {
+                    marginRight: 10,
+                  },
+                },
+                viewProps: {
+                  style: {
+                    backgroundColor: '#109CEB',
+                    padding: 5,
+                  },
+                },
+              }}
+              textStyles={{
+                fontSize: 18,
+                color: 'white',
+              }}
+            />
           ),
         }}
       />

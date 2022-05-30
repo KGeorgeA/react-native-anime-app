@@ -6,12 +6,21 @@ const initialState: State = {
   films: [],
   refresh: false,
   currentAnime: null,
+  genres: [],
   apiPagination: {
     current_page: 1,
     items: {
       count: 25,
     },
   },
+  isFilterDrawerShown: false,
+  // filters
+  animeSearchString: '',
+  animeGenresFilter: undefined,
+  animeTypesFilter: undefined,
+  animeMinScoreFilter: 0,
+  animeMaxScoreFilter: 0,
+  animeSortDirection: 'asc',
 };
 
 const postsSlice = createSlice({
@@ -21,25 +30,18 @@ const postsSlice = createSlice({
     updatePosts: (state, { payload }) => {
       state.films = payload;
     },
-    updateCurrentAnime: (state, { payload }) => ({
-      ...state,
-      currentAnime: payload,
-    }),
-    toggleRefresh: (state, { payload }) => ({
-      ...state,
-      refresh: payload,
-    }),
-    updateApiPagination: (state, { payload }) => ({
-      ...state,
-      apiPagination: payload,
-    }),
-    updateCurrentPage: (state, { payload }) => ({
-      ...state,
-      apiPagination: {
-        ...state.apiPagination,
-        current_page: payload,
-      },
-    }),
+    updateCurrentAnime: (state, { payload }) => {
+      state.currentAnime = payload;
+    },
+    toggleRefresh: (state, { payload }) => {
+      state.refresh = payload;
+    },
+    updateApiPagination: (state, { payload }) => {
+      state.apiPagination = payload;
+    },
+    updateCurrentPage: (state, { payload }) => {
+      state.apiPagination.current_page = payload;
+    },
     updateItemsCount: (state, { payload }) => ({
       ...state,
       apiPagination: {
@@ -50,6 +52,12 @@ const postsSlice = createSlice({
         },
       },
     }),
+    updateGenres: (state, { payload }) => {
+      state.genres = payload;
+    },
+    toggleFilterDrawerView: (state) => {
+      state.isFilterDrawerShown = !state.isFilterDrawerShown;
+    },
   },
 });
 
@@ -60,6 +68,8 @@ export const {
   updateApiPagination,
   updateCurrentPage,
   updateItemsCount,
+  updateGenres,
+  toggleFilterDrawerView,
 } = postsSlice.actions;
 
 export default postsSlice.reducer;

@@ -7,7 +7,7 @@ import {
   SafeAreaView,
 } from 'react-native';
 import CameraRoll from '@react-native-community/cameraroll';
-import { GestureDetector, Gesture, PanGestureHandler } from 'react-native-gesture-handler';
+import { GestureDetector, Gesture } from 'react-native-gesture-handler';
 import Animated, { useSharedValue, useAnimatedStyle, withTiming } from 'react-native-reanimated';
 
 import galeryStyles, { IMAGE_COUNT } from './Galery.styles';
@@ -17,13 +17,9 @@ const Galery: React.FC<{ flatListData: CameraRoll.PhotoIdentifier[] }> = ({ flat
   const [modalProps, setModalProps] = useState<string>('');
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  const isMovingHorizontal = useSharedValue(false);
-  const isMovingVertical = useSharedValue(false);
   const imagePositionY = useSharedValue(0);
-  const imagePositionX = useSharedValue(0);
 
   const horizontalPanGesture = Gesture.Pan()
-    .enabled(false)
     .onUpdate((event) => {
       imagePositionY.value = event.translationY;
     })
@@ -36,26 +32,8 @@ const Galery: React.FC<{ flatListData: CameraRoll.PhotoIdentifier[] }> = ({ flat
       }
     });
 
-  const verticalPanGesture = Gesture.Pan()
-    .enabled(!imagePositionY.value)
-    .onUpdate((event) => {
-      console.log({ imagePositionY:imagePositionY.value, imagePositionX:imagePositionX.value });
-
-      imagePositionY.value = 0;
-      imagePositionX.value = event.translationX;
-    })
-    .onEnd((event) => {
-      imagePositionX.value = withTiming(0, { duration: 100});
-
-      if (event.translationX >= 100 || event.translationX <= -100) {
-        console.log('lalalalala');
-      }
-    });
-
-  const raceGestureHandler = Gesture.Simultaneous(horizontalPanGesture, verticalPanGesture);
-
   const animatedModalViewStyle = useAnimatedStyle(() => ({
-    transform: [{ translateY: imagePositionY.value }, { translateX: imagePositionX.value}],
+    transform: [{ translateY: imagePositionY.value }],
   }));
 
   const handleModalOpen = useRef((imageUri: string) => {
@@ -91,7 +69,7 @@ const Galery: React.FC<{ flatListData: CameraRoll.PhotoIdentifier[] }> = ({ flat
         }}
       >
         <GestureDetector
-          gesture={raceGestureHandler}
+          gesture={horizontalPanGesture}
         >
           <SafeAreaView style={{ flex: 1 }}>
             <Animated.View

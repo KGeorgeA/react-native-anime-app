@@ -16,7 +16,7 @@ const Anime: React.FC<{ route: RouteProp<ListStackParamsList, 'Anime'> }> = (pro
   const animeId = props.route.params.animeId;
 
   const dispatch = useAppDispatch();
-  const currentAnime = useAppSelector((posts) => posts.posts.currentAnime);
+  const currentAnime = useAppSelector(({ posts }) => posts.currentAnime);
 
   useFocusEffect(
     useCallback(() => {

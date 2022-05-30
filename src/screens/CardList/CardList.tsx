@@ -9,6 +9,7 @@ import Loader from '../Loader/Loader';
 import { useAppDispatch, useAppSelector } from '../../utils/hooks';
 import thunks from '../../store/thunks';
 import type { RenderedItemProps } from '../../utils/types';
+import SlidingDrawer from './components/SlidingDrawer';
 
 const renderItem = ({ item }: RenderedItemProps) => <Card item={item} />;
 
@@ -20,6 +21,7 @@ const CardList: React.FC = () => {
 
   useEffect(() => {
     dispatch(thunks.getAnimes());
+    dispatch(thunks.getAllGenres());
   }, [dispatch]);
 
   const handleEndReached = () => dispatch(thunks.getMoreAnimes(page));
@@ -32,6 +34,8 @@ const CardList: React.FC = () => {
 
   return (
     <View style={styles.container}>
+      <SlidingDrawer />
+
       <View style={styles.flatList}>
         <FlatList
           keyExtractor={(item) => item.mal_id.toString()}

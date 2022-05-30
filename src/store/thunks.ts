@@ -9,9 +9,11 @@ import {
   updateApiPagination,
   updateCurrentPage,
   updateItemsCount,
+  updateGenres,
 } from './reducer';
 import getList from '../api/getList';
 import getOne from '../api/getOne';
+import getGenres from '../api/getGenres';
 import type { GetParams } from '../utils/types';
 
 export const getAnimes = createAsyncThunk<
@@ -74,8 +76,24 @@ export const getAnime = createAsyncThunk(
   },
 );
 
+export const getAllGenres = createAsyncThunk(
+  'posts/getAllGenres',
+ async (_, { dispatch }) => {
+   try {
+      const { data: { data } } = await getGenres();
+      const filteredData = data.filter((genre, genrePosition, genresArray) => {
+        return genresArray.findIndex((g) => g.mal_id === genre.mal_id) === genrePosition;
+      });
+      dispatch(updateGenres(filteredData));
+   } catch (error) {
+     console.log(error);
+   }
+ },
+);
+
 export default {
   getAnimes,
   getMoreAnimes,
   getAnime,
+  getAllGenres,
 };

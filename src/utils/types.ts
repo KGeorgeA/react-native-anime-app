@@ -105,6 +105,34 @@ export interface State {
   refresh: boolean;
   currentAnime: Anime | null;
   apiPagination: APIPagination;
+  genres: GenreType[];
+  isFilterDrawerShown: boolean;
+  animeSafeForWifeFilter?: boolean;
+  animeSearchString?: string;
+  animeGenresFilter?: string[] | string;  // or enum from 70+ genres)))
+  animeTypesFilter?: 'tv' | 'movie' | 'ova' | 'special' | 'ona' | 'music';
+  animerRatingFilter?: 'g' | 'pg' | 'pg13' | 'r17' | 'r' | 'rx';
+  animeSortFilter:
+    'mal_id'
+    |  'title'
+    |  'type'
+    |  'rating'
+    |  'start_date'
+    |  'end_date'
+    |  'episodes'
+    |  'score'
+    |  'scored_by'
+    |  'rank'
+    |  'popularity'
+    |  'members'
+    |  'favorites';
+  animeSortDirection?: 'asc' | 'desc';
+  animeStatusFilter?: 'airing' | 'complete' | 'upcoming';
+  animeScoreFilter?: number;
+  animeMinScoreFilter?: number;
+  animeMaxScoreFilter?: number;
+  animeStartDateFilter?: string;  //  YYYY-MM-DD
+  animeEndDateFilter?: string;    //  YYYY-MM-DD
 }
 
 export type APIPagination = {
@@ -172,6 +200,13 @@ export type Anime = {
   explicit_genres: AnimeNestedRelationType;
   themes: AnimeNestedRelationType;
   demographics: AnimeNestedRelationType;
+};
+
+type GenreType = {
+  mal_id: number;
+  name: string;
+  url: string;
+  count: number;
 };
 
 type AnimeNestedRelationType = Array<{
