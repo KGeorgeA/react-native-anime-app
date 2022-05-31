@@ -28,7 +28,6 @@ const Anime: React.FC<{ route: RouteProp<ListStackParamsList, 'Anime'> }> = (pro
   if (!currentAnime) {
     return <Loader />;
   }
-  // asdasdasdl;aksdhal;skddhkaklsdhalskdhalksdgajsdgaskjdglaskgdajklsgdajgsdlagsdjagsdkjgasjdgasldgasdjagsflkhv1lj2hvlkjgkjagsdglasfgaskjfgaklgwqlghslkga;sfgas;fg
 
   return (
     <SafeAreaView style={styles.iosContainer}>

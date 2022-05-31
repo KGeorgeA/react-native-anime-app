@@ -13,7 +13,11 @@ import Animated, { useSharedValue, useAnimatedStyle, withTiming } from 'react-na
 import galeryStyles, { IMAGE_COUNT } from './Galery.styles';
 import TouchableComponent from '../../../ui/components/TouchableComponent';
 
-const Galery: React.FC<{ flatListData: CameraRoll.PhotoIdentifier[] }> = ({ flatListData }) => {
+type GaleryType = {
+  flatListData: CameraRoll.PhotoIdentifier[];
+}
+
+const Galery: React.FC<GaleryType> = ({ flatListData }) => {
   const [modalProps, setModalProps] = useState<string>('');
   const [isModalOpen, setIsModalOpen] = useState(false);
 

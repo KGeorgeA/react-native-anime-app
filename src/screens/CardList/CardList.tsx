@@ -15,14 +15,53 @@ const renderItem = ({ item }: RenderedItemProps) => <Card item={item} />;
 
 const CardList: React.FC = () => {
   const dispatch = useAppDispatch();
-  const films = useAppSelector((state) => state.posts.films);
-  const refresh = useAppSelector((state) => state.posts.refresh);
-  const page = useAppSelector((state) => state.posts.apiPagination.current_page);
+  const films = useAppSelector(({ posts }) => posts.films);
+  const refresh = useAppSelector(({ posts }) => posts.refresh);
+  const page = useAppSelector(({ posts }) => posts.apiPagination.current_page);
+  const {
+    animeSearchString,
+    animeGenresFilter,
+    animeTypesFilter,
+    animeMinScoreFilter,
+    animeMaxScoreFilter,
+    animeSortDirection,
+    animeSafeForWifeFilter,
+    animerRatingFilter,
+    animeSortFilter,
+  } = useAppSelector(({ posts }) => posts);
 
   useEffect(() => {
     dispatch(thunks.getAnimes());
     dispatch(thunks.getAllGenres());
   }, [dispatch]);
+
+  useEffect(() => {
+    const filter = {
+      animeSearchString,
+      animeGenresFilter,
+      animeTypesFilter,
+      animeMinScoreFilter,
+      animeMaxScoreFilter,
+      animeSortDirection,
+      animeSafeForWifeFilter,
+      animerRatingFilter,
+      animeSortFilter,
+    };
+    console.log(filter);
+    // TO-DO: add useQueryString or smthn to prepare params for search
+    // dispatch(thunks.getAnimes(filter));
+  }, [
+    dispatch,
+    animeSearchString,
+    animeGenresFilter,
+    animeTypesFilter,
+    animeMinScoreFilter,
+    animeMaxScoreFilter,
+    animeSortDirection,
+    animeSafeForWifeFilter,
+    animerRatingFilter,
+    animeSortFilter,
+  ]);
 
   const handleEndReached = () => dispatch(thunks.getMoreAnimes(page));
 

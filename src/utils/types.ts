@@ -107,6 +107,7 @@ export interface State {
   apiPagination: APIPagination;
   genres: GenreType[];
   isFilterDrawerShown: boolean;
+  //  filters
   animeSafeForWifeFilter?: boolean;
   animeSearchString?: string;
   animeGenresFilter?: string[] | string;  // or enum from 70+ genres)))

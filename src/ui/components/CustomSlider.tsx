@@ -1,47 +1,63 @@
-import React, { useEffect, useState } from 'react';
-import { View, Text } from 'react-native';
+import React from 'react';
+import { View, Text, ViewStyle } from 'react-native';
 import type { StyleProp, TextStyle } from 'react-native';
+import type {
+  SliderOnChangeCallback,
+  SliderProps,
+} from '@miblanchard/react-native-slider/lib/types';
 
-import Slider from '@react-native-community/slider';
-import type { SliderProps } from '@react-native-community/slider';
+import { Slider } from '@miblanchard/react-native-slider';
 
 type CustomSliderType = {
   sliderText: string;
   textStyle?: StyleProp<TextStyle>;
   minSliderValue: number;
   maxSliderValue: number;
-  onSlidingStart: (value: number) => void;
-  onSlidingComplete: (value: number) => void;
+  onSlidingStart?: SliderOnChangeCallback;
+  onSlidingComplete?: SliderOnChangeCallback;
+  onValueChange?: SliderOnChangeCallback;
   sliderProps?: SliderProps;
+  viewStyles?: StyleProp<ViewStyle>;
+  initialValue: number[];
+  AboveThumbComponent?: (inputValue: number) => React.ReactNode;
 }
 
 const CustomSlider: React.FC<CustomSliderType> = ({
   sliderText,
   textStyle,
-  sliderProps,
+  sliderProps = {},
+  viewStyles,
   minSliderValue = 0,
   maxSliderValue = 10,
   onSlidingStart = () => null,
   onSlidingComplete = () => null,
+  onValueChange = () => null,
+  initialValue,
+  AboveThumbComponent = () => null,
 }) => {
-  const [sliderReadOnlyValue, setSliderReadOnlyValue] = useState(0);
-
-  const handleSliderValueChange = (value: number) => {
-    setSliderReadOnlyValue(value);
-  };
+  const renderAboveThumbComponent = (index: number) => AboveThumbComponent(initialValue[index]);
 
   return (
-    <View>
+    <View
+      style={viewStyles}
+    >
       <Text style={textStyle}>{sliderText}</Text>
 
       <Slider
-        step={0.5}
         {...sliderProps}
+        animationType="spring"
+        animateTransitions
+        maximumTrackTintColor="#fff"
+        minimumTrackTintColor="#084d77"
         minimumValue={minSliderValue}
         maximumValue={maxSliderValue}
-        onValueChange={handleSliderValueChange}
+        renderAboveThumbComponent={renderAboveThumbComponent}
+        value={initialValue}
+        step={0.5}
+        thumbTintColor="#084d77"
         onSlidingStart={onSlidingStart}
         onSlidingComplete={onSlidingComplete}
+        onValueChange={onValueChange}
       />
     </View>
   );

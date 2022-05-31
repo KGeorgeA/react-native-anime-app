@@ -21,6 +21,12 @@ const initialState: State = {
   animeMinScoreFilter: 0,
   animeMaxScoreFilter: 0,
   animeSortDirection: 'asc',
+  animeSafeForWifeFilter: true,
+  animerRatingFilter: 'g',
+  animeSortFilter: 'title',
+  // animeStatusFilter: null,
+  // animeStartDateFilter: '',
+  // animeEndDateFilter: '',
 };
 
 const postsSlice = createSlice({
@@ -58,6 +64,34 @@ const postsSlice = createSlice({
     toggleFilterDrawerView: (state) => {
       state.isFilterDrawerShown = !state.isFilterDrawerShown;
     },
+
+    updateSearchString: (state, { payload }) => {
+      state.animeSearchString = payload;
+    },
+    updateAnimeGenresFilter: (state, { payload }) => {
+      state.animeGenresFilter = payload;
+    },
+    updateAnimeTypesFilter: (state, { payload }) => {
+      state.animeTypesFilter = payload;
+    },
+    updateAnimeMinScoreFilter: (state, { payload }) => {
+      state.animeMinScoreFilter = payload;
+    },
+    updateAnimeMaxScoreFilter: (state, { payload }) => {
+      state.animeMaxScoreFilter = payload;
+    },
+    updateAnimeSortDirection: (state, { payload }) => {
+      state.animeSortDirection = payload;
+    },
+    updateAnimeSafeForWifeFilter: (state, { payload }) => {
+      state.animeSafeForWifeFilter = payload;
+    },
+    updateAnimerRatingFilter: (state, { payload }) => {
+      state.animerRatingFilter = payload;
+    },
+    updateAnimeSortFilter: (state, { payload }) => {
+      state.animeSortFilter = payload;
+    },
   },
 });
 
@@ -70,6 +104,15 @@ export const {
   updateItemsCount,
   updateGenres,
   toggleFilterDrawerView,
+  updateSearchString,
+  updateAnimeGenresFilter,
+  updateAnimeTypesFilter,
+  updateAnimeMinScoreFilter,
+  updateAnimeMaxScoreFilter,
+  updateAnimeSortDirection,
+  updateAnimeSafeForWifeFilter,
+  updateAnimerRatingFilter,
+  updateAnimeSortFilter,
 } = postsSlice.actions;
 
 export default postsSlice.reducer;

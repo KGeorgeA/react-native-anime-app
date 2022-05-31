@@ -1,4 +1,3 @@
-/* eslint-disable no-console */
 import React, { useCallback, useState } from 'react';
 import {
   View,
@@ -49,6 +48,7 @@ const MediaScreen: React.FC = () => {
       if (!hasPermission) return [];
       CameraRoll.getPhotos({ first: 12 }).then((items) => setFlatListItems(items.edges));
     } catch (error) {
+      // eslint-disable-next-line no-console
       console.log(error);
     }
   };

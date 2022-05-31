@@ -1,4 +1,3 @@
-/* eslint-disable no-console */
 import React, { useRef, useState } from 'react';
 import {
   StyleSheet,
@@ -88,6 +87,7 @@ const CameraScreen: React.FC = () => {
         await CameraRoll.save(r.path, { type: 'photo' });
       });
     } catch (error) {
+      // eslint-disable-next-line no-console
       console.log(error);
     }
   };
