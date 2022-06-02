@@ -56,6 +56,7 @@ const PermissionScreen: React.FC = (): React.ReactElement => {
             </Text>
           </Text>
         )}
+
         {microphonePermissionStatus !== 'authorized' && (
           <Text style={styles.permissionText}>
             This App needs <Text style={styles.bold}>Micro permission</Text>.

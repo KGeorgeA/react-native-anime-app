@@ -1,4 +1,3 @@
-/* eslint-disable no-console */
 import React, { useEffect, useMemo, useState } from 'react';
 import { View, Text, Dimensions } from 'react-native';
 import Animated, { useAnimatedStyle, withTiming } from 'react-native-reanimated';
@@ -14,9 +13,13 @@ import CustomAboveThumbComponent from './AboveThumbComponent';
 import { useAppDispatch, useAppSelector } from '../../../utils/hooks';
 import * as Reducers from '../../../store/reducer';
 
+/// /////////////   //////////////////// ///
+///  FIND DRAWER LIB or made THIS ui kit ///
+/// /////////////   //////////////////// ///
+
 type SelectorType = {
   label: string;
-  value: string;
+  value: string | number;
 }
 
 const TYPE_SELECTOR_ITEMS = [
@@ -38,44 +41,60 @@ const RATING_SELECTOR_ITEMS = [
 
 const width = Dimensions.get('window').width;
 
-const SlidingDrawer = () => {
+//  TIPIZACIA ETOGO *** BUDET OOOOCHEN DOLGOI
+
+const SlidingDrawer: React.FC = () => {
   const dispatch = useAppDispatch();
-  const { genres, isFilterDrawerShown } = useAppSelector(({ posts }) => posts);
+  const {
+    genres,
+    isFilterDrawerShown,
+    animeSearchString,
+    animeGenresFilter,
+    animeTypesFilter,
+    animerRatingFilter,
+    animeMinScoreFilter,
+    animeMaxScoreFilter,
+  } = useAppSelector(({ posts }) => posts);
 
   const [currentPicker, setCurrentPicker] = useState<'genres' | 'types' | 'rating' | null>(null);
 
-  const [searchString, setSearchString] = useState('');
+  const [searchString, setSearchString] = useState(animeSearchString);
 
   const genreItems = useMemo(() => genres.map((genre) => ({
     label: genre.name,
-    value: genre.name.toLowerCase(),
+    value: genre.mal_id,
   })), [genres]);
 
   const [isGenresSelectorOpen, setIsGenresSelectorOpen] = useState(false);
   const [
     genresSelectorValue,
     setGenresSelectorValue,
-  ] = useState<ValueType | null>(null);  //  TO-DO: when 'multiple' prop will work add 'ValueType[]'
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore -- -- -- TO-DO: remove when 'multiple' prop will work add 'ValueType[]'
+  ] = useState<ValueType | null>(animeGenresFilter);
   const [genresSelectorItems, setGenresSelectorItems] = useState<SelectorType[]>([]);
 
   const [isTypesSelectorOpen, setIsTypesSelectorOpen] = useState(false);
   const [
     typesSelectorValue,
     setTypesSelectorValue,
-  ] = useState<ValueType | null>(null);
+  ] = useState<ValueType | null>(animeTypesFilter);
   const [typesSelectorItems, setTypesSelectorItems] = useState<SelectorType[]>(TYPE_SELECTOR_ITEMS);
 
   const [isRatingSelectorOpen, setIsRatingSelectorOpen] = useState(false);
   const [
     ratingSelectorValue,
     setRatingSelectorValue,
-  ] = useState<ValueType | null>(null);
+  ] = useState<ValueType | null>(animerRatingFilter);
   const [
     ratingSelectorItems,
     setRatingSelectorItems,
   ] = useState<SelectorType[]>(RATING_SELECTOR_ITEMS);
 
-  const [scoreSelectorValue, setScoreSelectorValue] = useState<number[]>([0, 10]);
+  const [
+    scoreSelectorValue,
+    setScoreSelectorValue,
+  ] = useState<number[]>([animeMinScoreFilter || 0, animeMaxScoreFilter || 10]);
 
   const animatedFilterDrawerStyles = useAnimatedStyle(() => ({
     transform: [{translateX: isFilterDrawerShown
@@ -91,10 +110,16 @@ const SlidingDrawer = () => {
 
   const handleResetFilters = () => {
     setSearchString('');
+    dispatch(Reducers.updateSearchString(''));
     setGenresSelectorValue(null);
+    dispatch(Reducers.updateAnimeGenresFilter(undefined));
     setTypesSelectorValue(null);
+    dispatch(Reducers.updateAnimeTypesFilter(undefined));
     setRatingSelectorValue(null);
+    dispatch(Reducers.updateAnimerRatingFilter(undefined));
     setScoreSelectorValue([0, 10]);
+    dispatch(Reducers.updateAnimeMinScoreFilter(0));
+    dispatch(Reducers.updateAnimeMaxScoreFilter(10));
   };
 
   const handleApplyFilters = () => {
@@ -118,123 +143,142 @@ const SlidingDrawer = () => {
   return (
     <Animated.View style={[styles.fullFillContainer, animatedFilterDrawerStyles]}>
       <View style={styles.container}>
-        <View style={{ margin: 10 }}>
-          <Text style={{color: 'white', fontSize: 24}}>Avaible Filters</Text>
+        <Text style={styles.headerText}>Avaible Filters</Text>
 
-          <TextInputs
-            textInputPropsArray={[{
-              style: {
-                backgroundColor: '#fff',
-                borderRadius: 8,
-                borderWidth: 1,
-                borderColor: '#000',
-                padding: 5,
-                marginVertical: 5,
-              },
-              multiline: true,
-              placeholder: 'Search',
-              keyboardAppearance: 'default',
-              maxLength: 50,
-              value: searchString,
-              onChangeText: setSearchString,
-            }]}
-          />
+        <TextInputs
+          textInputPropsArray={[{
+            style: {
+              backgroundColor: '#fff',
+              borderRadius: 8,
+              borderWidth: 1,
+              borderColor: '#000',
+              padding: 5,
+              marginVertical: 5,
+            },
+            multiline: true,
+            placeholder: 'Search',
+            keyboardAppearance: 'default',
+            maxLength: 50,
+            value: searchString,
+            onChangeText: setSearchString,
+          }]}
+        />
 
-          <DropDownPicker
-            onOpen={() => setCurrentPicker('genres')}
-            onClose={() => setCurrentPicker(null)}
-            closeOnBackPressed
-            closeAfterSelecting
-            style={styles.dropdownSelector}
-            open={currentPicker === 'genres' && isGenresSelectorOpen}
-            value={genresSelectorValue}
-            items={genresSelectorItems}
-            setItems={setGenresSelectorItems}
-            searchable
-            //  multiple  //  does not work
-            setOpen={setIsGenresSelectorOpen}  //  garbage thing
-            setValue={setGenresSelectorValue}
-            placeholder="Genres"
-            zIndex={500}
-            zIndexInverse={500}
-          />
+        <DropDownPicker
+          // placeholderStyle={{}}
+          // searchTextInputStyle={{}}
+          // listParentContainerStyle={{}}
+          // selectedItemContainerStyle={{backgroundColor: 'blue', height: 100}}
+          // selectedItemLabelStyle={{backgroundColor: 'red'}}
+          containerStyle={{backgroundColor: 'red'}}
 
-          <DropDownPicker
-            onOpen={() => setCurrentPicker('types')}
-            onClose={() => setCurrentPicker(null)}
-            closeOnBackPressed
-            closeAfterSelecting
-            style={styles.dropdownSelector}
-            open={currentPicker === 'types' && isTypesSelectorOpen}
-            value={typesSelectorValue}
-            items={typesSelectorItems}
-            setItems={setTypesSelectorItems}
-            //  searchable
-            //  multiple  //  does not work
-            setOpen={setIsTypesSelectorOpen}  //  garbage thing
-            setValue={setTypesSelectorValue}
-            placeholder="Types"
-            zIndex={400}
-            zIndexInverse={400}
-          />
+          onOpen={() => setCurrentPicker('genres')}
+          onClose={() => setCurrentPicker(null)}
+          closeOnBackPressed
+          closeAfterSelecting
+          style={styles.dropdownSelector}
+          open={currentPicker === 'genres' && isGenresSelectorOpen}
+          value={genresSelectorValue}
+          items={genresSelectorItems}
+          setItems={setGenresSelectorItems}
+          searchable
+          // multiple  //  does not work
+          setOpen={setIsGenresSelectorOpen}  // garbage thing
+          setValue={setGenresSelectorValue}
+          placeholder="Genres"
+          zIndex={500}
+          zIndexInverse={500}
+        />
 
-          <DropDownPicker
-            onOpen={() => setCurrentPicker('rating')}
-            onClose={handleDropDownPickerClose}
-            closeOnBackPressed
-            closeAfterSelecting
-            style={styles.dropdownSelector}
-            open={currentPicker === 'rating' && isRatingSelectorOpen}
-            value={ratingSelectorValue}
-            items={ratingSelectorItems}
-            setItems={setRatingSelectorItems}
-            //  searchable
-            //  multiple  //  does not work
-            setOpen={setIsRatingSelectorOpen}  //  garbage thing
-            setValue={setRatingSelectorValue}
-            placeholder="Rating"
-            zIndex={300}
-            zIndexInverse={300}
-          />
+        <DropDownPicker
+          // placeholderStyle={{}}
+          // searchTextInputStyle={{}}
+          // listParentContainerStyle={{}}
+          // selectedItemContainerStyle={{backgroundColor: 'blue', height: 100}}
+          // selectedItemLabelStyle={{backgroundColor: 'red'}}
+          containerStyle={{backgroundColor: 'red'}}
 
-          <CustomSlider
-            initialValue={scoreSelectorValue}
-            minSliderValue={0}
-            maxSliderValue={10}
-            //  onSlidingComplete={setScoreSelectorValue}
-            onValueChange={setScoreSelectorValue}  //  BRUH
-            viewStyles={styles.sliderContainer}
-            textStyle={styles.sliderText}
-            sliderText="Minimal Anime score"
-            AboveThumbComponent={CustomAboveThumbComponent}
-          />
+          onOpen={() => setCurrentPicker('types')}
+          onClose={() => setCurrentPicker(null)}
+          closeOnBackPressed
+          closeAfterSelecting
+          style={styles.dropdownSelector}
+          open={currentPicker === 'types' && isTypesSelectorOpen}
+          value={typesSelectorValue}
+          items={typesSelectorItems}
+          setItems={setTypesSelectorItems}
+          //  searchable
+          //  multiple // does not work
+          setOpen={setIsTypesSelectorOpen}  // garbage thing
+          setValue={setTypesSelectorValue}
+          placeholder="Types"
+          zIndex={400}
+          zIndexInverse={400}
+        />
 
-          <CustomButton
-            touchableComponentProps={{
-              viewProps: {
-                style: [styles.applyFiltersButtonContainer, { marginBottom: 10 }],
-              },
-              touchableOpacityProps: {
-                onPress: handleResetFilters,
-              },
-            }}
-            textStyles={styles.applyFiltersButtonText}
-            buttonText="Reset Filters"
-          />
+        <DropDownPicker
+          // placeholderStyle={{}
+          // searchTextInputStyle={{}}
+          // listParentContainerStyle={{}}
+          // selectedItemContainerStyle={{backgroundColor: 'blue', height: 100}}
+          // selectedItemLabelStyle={{backgroundColor: 'red'}}
+          containerStyle={{backgroundColor: 'red'}}
 
-          <CustomButton
-            touchableComponentProps={{
-              viewProps: {
-                style: styles.applyFiltersButtonContainer,
-              },
-              touchableOpacityProps: {
-                onPress: handleApplyFilters,
-              },
-            }}
-            textStyles={styles.applyFiltersButtonText}
-            buttonText="Apply filters"
-          />
-        </View>
+          onOpen={() => setCurrentPicker('rating')}
+          onClose={handleDropDownPickerClose}
+          closeOnBackPressed
+          closeAfterSelecting
+          style={styles.dropdownSelector}
+          open={currentPicker === 'rating' && isRatingSelectorOpen}
+          value={ratingSelectorValue}
+          items={ratingSelectorItems}
+          setItems={setRatingSelectorItems}
+          //  searchable
+          //  multiple // does not work
+          setOpen={setIsRatingSelectorOpen}  // garbage thing
+          setValue={setRatingSelectorValue}
+          placeholder="Rating"
+          zIndex={300}
+          zIndexInverse={300}
+        />
+
+        <CustomSlider
+          initialValue={scoreSelectorValue}
+          minSliderValue={0}
+          maxSliderValue={10}
+          //  onSlidingComplete={setScoreSelectorValue}
+          onValueChange={(value) => setScoreSelectorValue(value as number[])}  //  BRUH
+          viewStyles={styles.sliderContainer}
+          textStyle={styles.sliderText}
+          sliderText="Minimal Anime score"
+          AboveThumbComponent={CustomAboveThumbComponent}
+        />
+
+        <CustomButton
+          touchableComponentProps={{
+            viewProps: {
+              style: [styles.applyFiltersButtonContainer, { marginBottom: 10 }],
+            },
+            touchableOpacityProps: {
+              onPress: handleResetFilters,
+            },
+          }}
+          textStyles={styles.applyFiltersButtonText}
+          buttonText="Reset Filters"
+        />
+
+        <CustomButton
+          touchableComponentProps={{
+            viewProps: {
+              style: styles.applyFiltersButtonContainer,
+            },
+            touchableOpacityProps: {
+              onPress: handleApplyFilters,
+            },
+          }}
+          textStyles={styles.applyFiltersButtonText}
+          buttonText="Apply filters"
+        />
       </View>
     </Animated.View>
   );

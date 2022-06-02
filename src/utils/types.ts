@@ -48,16 +48,16 @@ export type MainScreenProp = NativeStackNavigationProp<
 
 export type GetParams = {
   page: number;
-  limit: number;
+  limit?: number;
   q?: string;
-  type?: TypesEnum;
+  type?: TypesEnum | null;
   score?: number;
-  min_score?: number;
-  max_score?: number;
-  status?: StatusesEnum;
-  rating?: RatingsEnum;
+  min_score?: number | null;
+  max_score?: number | null;
+  status?: StatusesEnum | null;
+  rating?: RatingsEnum | null;
   sfw?: boolean;
-  genres?: string;
+  genres?: string | string[] | null;
   genres_exclude?: string;
   order_by?: OrderEnum;
   sort?: 'desc' | 'asc';
@@ -110,28 +110,15 @@ export interface State {
   //  filters
   animeSafeForWifeFilter?: boolean;
   animeSearchString?: string;
-  animeGenresFilter?: string[] | string;  // or enum from 70+ genres)))
-  animeTypesFilter?: 'tv' | 'movie' | 'ova' | 'special' | 'ona' | 'music';
-  animerRatingFilter?: 'g' | 'pg' | 'pg13' | 'r17' | 'r' | 'rx';
-  animeSortFilter:
-    'mal_id'
-    |  'title'
-    |  'type'
-    |  'rating'
-    |  'start_date'
-    |  'end_date'
-    |  'episodes'
-    |  'score'
-    |  'scored_by'
-    |  'rank'
-    |  'popularity'
-    |  'members'
-    |  'favorites';
+  animeGenresFilter: string[] | string | null;  // or enum from 70+ genres)))
+  animeTypesFilter: TypesEnum | null;
+  animerRatingFilter: RatingsEnum | null;
+  animeSortFilter: OrderEnum | null;
   animeSortDirection?: 'asc' | 'desc';
-  animeStatusFilter?: 'airing' | 'complete' | 'upcoming';
+  animeStatusFilter?: StatusesEnum;
   animeScoreFilter?: number;
-  animeMinScoreFilter?: number;
-  animeMaxScoreFilter?: number;
+  animeMinScoreFilter: number | null;
+  animeMaxScoreFilter: number | null;
   animeStartDateFilter?: string;  //  YYYY-MM-DD
   animeEndDateFilter?: string;    //  YYYY-MM-DD
 }

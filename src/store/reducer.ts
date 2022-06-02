@@ -14,19 +14,15 @@ const initialState: State = {
     },
   },
   isFilterDrawerShown: false,
-  // filters
   animeSearchString: '',
-  animeGenresFilter: undefined,
-  animeTypesFilter: undefined,
-  animeMinScoreFilter: 0,
-  animeMaxScoreFilter: 0,
+  animeGenresFilter: null,
+  animeTypesFilter: null,
+  animerRatingFilter: null,
+  animeMinScoreFilter: null,
+  animeMaxScoreFilter: null,
   animeSortDirection: 'asc',
   animeSafeForWifeFilter: true,
-  animerRatingFilter: 'g',
   animeSortFilter: 'title',
-  // animeStatusFilter: null,
-  // animeStartDateFilter: '',
-  // animeEndDateFilter: '',
 };
 
 const postsSlice = createSlice({

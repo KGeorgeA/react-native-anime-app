@@ -1,4 +1,3 @@
-/* eslint-disable max-len */
 import React, { useState } from 'react';
 import { Image, Linking } from 'react-native';
 
@@ -15,7 +14,9 @@ const AppLogo: React.FC = () => {
 
   const handleLongPress = () => Linking.openURL('https://myanimelist.net/');
 
-  const handlePress = () => setLogoImageUri((prev) => prev === imageUri.guts ? imageUri.griffith : imageUri.guts);
+  const handlePress = () => {
+    setLogoImageUri((prev) => prev === imageUri.guts ? imageUri.griffith : imageUri.guts);
+  };
 
   return (
     <TouchableComponent

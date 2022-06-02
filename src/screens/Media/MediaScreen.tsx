@@ -13,7 +13,7 @@ import type { NativeStackNavigationProp } from '@react-navigation/native-stack';
 
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import styles from './MediaScreen.styles';
-import Separator from '../CardList/components/Separator';
+import Separator from '../../ui/components/Separator';
 
 import type { MediaStackParamsList } from '../../utils/types';
 import Galery from './components/Galery';
@@ -63,6 +63,7 @@ const MediaScreen: React.FC = () => {
       <View style={styles.container}>
         <View style={styles.makePictureContainer}>
             <View style={styles.makePictureButtonWrapper}>
+              {/* TO-DO: change this TO to CustomButton from ui kit */}
               <TouchableOpacity
                 style={styles.makePictureButton}
                 onPress={() => navigation.navigate('CameraScreen')}

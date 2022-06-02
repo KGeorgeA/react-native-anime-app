@@ -9,7 +9,7 @@ customAxios.interceptors.response.use(
   (err) => {
     // eslint-disable-next-line no-console
     console.log('OSHIBKA', err);
-    throw err;
+    throw Error(err);
   },
 );
 

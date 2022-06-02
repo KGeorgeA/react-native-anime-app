@@ -1,6 +1,4 @@
-/* eslint-disable no-console */
 import { createAsyncThunk } from '@reduxjs/toolkit';
-
 import { AppDispatch, RootState } from './store';
 import {
   updatePosts,
@@ -20,7 +18,7 @@ export const getAnimes = createAsyncThunk<
   void,
   GetParams | undefined,
   { dispatch: AppDispatch }
->('posts/getAnimes', async (params = { limit: 25, page: 1 }, { dispatch }) => {
+>('posts/getAnimes', async ( params, { dispatch } ) => {
   try {
     dispatch(toggleRefresh(true));
 
@@ -30,7 +28,7 @@ export const getAnimes = createAsyncThunk<
     dispatch(updatePosts(data));
   } catch (error) {
     dispatch(toggleRefresh(false));
-    console.log(error);
+    throw Error(error as string);
   } finally {
     dispatch(toggleRefresh(false));
   }
@@ -43,7 +41,7 @@ export const getMoreAnimes = createAsyncThunk<
     dispatch: AppDispatch,
     state: RootState,
   }
->('posts/getMoreAnimes', async (params, { dispatch, getState }) => {
+>('posts/getMoreAnimes', async (_, { dispatch, getState }) => {
   try {
     const { apiPagination, films } = getState().posts;
 
@@ -60,7 +58,7 @@ export const getMoreAnimes = createAsyncThunk<
       dispatch(updatePosts(films.concat(data)));
     }
   } catch (error) {
-    console.log(error);
+    throw Error(error as string);
   }
 });
 
@@ -71,7 +69,7 @@ export const getAnime = createAsyncThunk(
       const { data: { data } } = await getOne(id);
       dispatch(updateCurrentAnime(data));
     } catch (error) {
-      console.log(error);
+      throw Error(error as string);
     }
   },
 );
@@ -86,7 +84,7 @@ export const getAllGenres = createAsyncThunk(
       });
       dispatch(updateGenres(filteredData));
    } catch (error) {
-     console.log(error);
+     throw Error(error as string);
    }
  },
 );

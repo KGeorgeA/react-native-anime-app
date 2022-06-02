@@ -6,6 +6,7 @@ import {
   Platform,
   TouchableWithoutFeedback,
   PermissionsAndroid,
+  Vibration,
 } from 'react-native';
 import CameraRoll from '@react-native-community/cameraroll';
 import { useIsFocused } from '@react-navigation/native';
@@ -67,10 +68,11 @@ const CameraScreen: React.FC = () => {
 
   const handleCameraCapture = async () => {
     try {
+      // does not work
       captureButtonRotation.value = withSequence(
-        withTiming(-10, { duration: 50 }),
-        withRepeat(withTiming(10, { duration: 100 }), 6, true),
-        withTiming(0, { duration: 50 }),
+        withTiming(-10, { duration: 500 }),
+        withRepeat(withTiming(10, { duration: 1000 }), 6, true),
+        withTiming(0, { duration: 500 }),
       );
 
       // does not work
@@ -82,6 +84,8 @@ const CameraScreen: React.FC = () => {
       const savePermission = await requestSavePermission();
 
       if (!savePermission) return null;
+
+      Vibration.vibrate();
 
       camera.current?.takePhoto().then(async (r) => {
         await CameraRoll.save(r.path, { type: 'photo' });
@@ -108,6 +112,7 @@ const CameraScreen: React.FC = () => {
     return <Loader />;
   }
 
+  //  TO-DO: use ui kit
   return (
     <View style={styles.container}>
       {!!device && (

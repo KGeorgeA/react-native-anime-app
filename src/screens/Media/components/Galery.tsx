@@ -3,14 +3,13 @@ import {
   View,
   Image,
   FlatList,
-  Modal,
+  Text,
   SafeAreaView,
 } from 'react-native';
 import CameraRoll from '@react-native-community/cameraroll';
-import { GestureDetector, Gesture } from 'react-native-gesture-handler';
-import Animated, { useSharedValue, useAnimatedStyle, withTiming } from 'react-native-reanimated';
 
-import galeryStyles, { IMAGE_COUNT } from './Galery.styles';
+import Modal from 'react-native-modal';
+import styles, { IMAGE_COUNT } from './Galery.styles';
 import TouchableComponent from '../../../ui/components/TouchableComponent';
 
 type GaleryType = {
@@ -18,75 +17,53 @@ type GaleryType = {
 }
 
 const Galery: React.FC<GaleryType> = ({ flatListData }) => {
-  const [modalProps, setModalProps] = useState<string>('');
+  const [modalProps, setModalProps] = useState<string | null>('');
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  const imagePositionY = useSharedValue(0);
-
-  const horizontalPanGesture = Gesture.Pan()
-    .onUpdate((event) => {
-      imagePositionY.value = event.translationY;
-    })
-    .onEnd((event) => {
-      imagePositionY.value = withTiming(0, { duration: 100 });
-
-      if (event.translationY >= 200 || event.translationY <= -200) {
-        setIsModalOpen(false);
-        imagePositionY.value = 0;
-      }
-    });
-
-  const animatedModalViewStyle = useAnimatedStyle(() => ({
-    transform: [{ translateY: imagePositionY.value }],
-  }));
-
-  const handleModalOpen = useRef((imageUri: string) => {
+  const toggleModal = useRef((imageUri: string | null) => {
     setModalProps(imageUri);
-    setIsModalOpen((prev) => !prev);
+    setIsModalOpen(!!imageUri);
   });
 
   const renderItem = ({ item }: {item: CameraRoll.PhotoIdentifier}) => {
-    const handleModalOpenRef = () => {
-      handleModalOpen.current(item.node.image.uri);
-    };
+    const toggleModalRef = () => toggleModal.current(item.node.image.uri);
 
     return (
       <TouchableComponent
         touchableOpacityProps={{
-          onPress: handleModalOpenRef,
+          onPress: toggleModalRef,
         }}
-        viewProps={{
-          style: galeryStyles.flatListItem,
-        }}
+        viewProps={{ style: styles.flatListItem }}
       >
-        <Image source={{uri: item.node.image.uri}} style={galeryStyles.flatListItemImage}/>
+        <Image source={{uri: item.node.image.uri}} style={styles.flatListItemImage}/>
       </TouchableComponent>
     );
   };
 
+  // TO-DO: change "No image" to normal component
   return (
-    <View style={galeryStyles.galeryContainer}>
+    <View style={styles.galeryContainer}>
       <Modal
-        visible={isModalOpen}
-        onRequestClose={() => {
-          handleModalOpen.current('');
+        isVisible={isModalOpen}
+        animationIn="slideInUp"
+        swipeDirection={['down', 'up']}
+        onBackdropPress={() => {
+          toggleModal.current(null);
+        }}
+        onSwipeComplete={() => {
+            toggleModal.current(null);
         }}
       >
-        <GestureDetector
-          gesture={horizontalPanGesture}
-        >
-          <SafeAreaView style={{ flex: 1 }}>
-            <Animated.View
-              style={[galeryStyles.modalCenteredContainer, animatedModalViewStyle]}
-            >
-              <View
-                style={galeryStyles.modalView}
-              >
-                <Image source={{uri: modalProps}} style={galeryStyles.modalImage}/>
-              </View>
-            </Animated.View>
-          </SafeAreaView>
-        </GestureDetector>
+        <SafeAreaView style={styles.safeArea}>
+          <View style={styles.modalCenteredContainer}>
+            <View style={styles.modalView}>
+              {modalProps
+                ? <Image source={{uri: modalProps}} style={styles.modalImage}/>
+                : <Text>No image</Text>
+              }
+            </View>
+          </View>
+        </SafeAreaView>
       </Modal>
 
       <FlatList
@@ -95,7 +72,7 @@ const Galery: React.FC<GaleryType> = ({ flatListData }) => {
         renderItem={renderItem}
         horizontal={false}
         numColumns={IMAGE_COUNT}
-      />
+        />
     </View>
   );
 };

@@ -8,6 +8,8 @@ export type TouchableComponentPropsType = {
   children?: ReactNode;
 }
 
+// That looks kinda bad VERY bad
+// TO-DO: refactor it
 const TouchableComponent: React.FC<TouchableComponentPropsType> = ({
   touchableOpacityProps,
   viewProps,

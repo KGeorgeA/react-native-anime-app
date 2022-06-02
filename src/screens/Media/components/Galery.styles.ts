@@ -3,9 +3,12 @@ import { StyleSheet, Dimensions } from 'react-native';
 export const IMAGE_COUNT = 3;
 const IMAGE_MARGIN = 3;
 const IMAGES_MARGIN = IMAGE_COUNT * IMAGE_MARGIN;
-const IMAGE_WIDTH = (Dimensions.get('window').width / IMAGE_COUNT) - IMAGES_MARGIN;
+const IMAGE_WIDTH = (Dimensions.get('window').width / IMAGE_COUNT) - IMAGES_MARGIN;  // will not rerender (like when phone position change)
 
 export default StyleSheet.create({
+  safeArea: {
+    flex: 1,
+  },
   galeryContainer: {
     flex: 4,
     margin: IMAGE_MARGIN,

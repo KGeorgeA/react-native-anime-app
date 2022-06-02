@@ -3,32 +3,30 @@ import { View, FlatList } from 'react-native';
 
 import styles from './CardList.styles';
 import Card from './components/Card';
-import Separator from './components/Separator';
+import Separator from '../../ui/components/Separator';
 import Loader from '../Loader/Loader';
+import SlidingDrawer from './components/SlidingDrawer';
 
 import { useAppDispatch, useAppSelector } from '../../utils/hooks';
 import thunks from '../../store/thunks';
-import type { RenderedItemProps } from '../../utils/types';
-import SlidingDrawer from './components/SlidingDrawer';
+import type { GetParams, RenderedItemProps } from '../../utils/types';
+import EmptyScreen from './components/EmptyScreen';
 
 const renderItem = ({ item }: RenderedItemProps) => <Card item={item} />;
 
 const CardList: React.FC = () => {
   const dispatch = useAppDispatch();
-  const films = useAppSelector(({ posts }) => posts.films);
-  const refresh = useAppSelector(({ posts }) => posts.refresh);
-  const page = useAppSelector(({ posts }) => posts.apiPagination.current_page);
   const {
+    films,
+    refresh,
     animeSearchString,
     animeGenresFilter,
     animeTypesFilter,
+    animerRatingFilter,
     animeMinScoreFilter,
     animeMaxScoreFilter,
-    animeSortDirection,
-    animeSafeForWifeFilter,
-    animerRatingFilter,
-    animeSortFilter,
   } = useAppSelector(({ posts }) => posts);
+  const page = useAppSelector(({ posts }) => posts.apiPagination.current_page);
 
   useEffect(() => {
     dispatch(thunks.getAnimes());
@@ -36,59 +34,56 @@ const CardList: React.FC = () => {
   }, [dispatch]);
 
   useEffect(() => {
-    const filter = {
-      animeSearchString,
-      animeGenresFilter,
-      animeTypesFilter,
-      animeMinScoreFilter,
-      animeMaxScoreFilter,
-      animeSortDirection,
-      animeSafeForWifeFilter,
-      animerRatingFilter,
-      animeSortFilter,
+    const filter: GetParams = {
+      page: 1,
+      q: animeSearchString,
+      genres: animeGenresFilter,
+      type: animeTypesFilter,
+      rating: animerRatingFilter,
+      min_score: animeMinScoreFilter,
+      max_score: animeMaxScoreFilter,
     };
-    console.log(filter);
-    // TO-DO: add useQueryString or smthn to prepare params for search
-    // dispatch(thunks.getAnimes(filter));
+
+    dispatch(thunks.getAnimes(filter));
   }, [
     dispatch,
     animeSearchString,
     animeGenresFilter,
     animeTypesFilter,
+    animerRatingFilter,
     animeMinScoreFilter,
     animeMaxScoreFilter,
-    animeSortDirection,
-    animeSafeForWifeFilter,
-    animerRatingFilter,
-    animeSortFilter,
   ]);
 
   const handleEndReached = () => dispatch(thunks.getMoreAnimes(page));
 
-  const handleRefresh = () => dispatch(thunks.getAnimes({ limit: 25, page: 1 }));
+  const handleRefresh = () => dispatch(thunks.getAnimes({ page: 1, limit: 25 }));
 
-  if (!films.length) {
-    return <Loader />;
+  if (!films.length && !refresh) {
+    return <EmptyScreen />;
   }
 
   return (
     <View style={styles.container}>
       <SlidingDrawer />
 
-      <View style={styles.flatList}>
-        <FlatList
-          keyExtractor={(item) => item.mal_id.toString()}
-          data={films}
-          removeClippedSubviews
-          renderItem={renderItem}
-          refreshing={refresh}
-          onRefresh={handleRefresh}
-          ItemSeparatorComponent={Separator}
-          onEndReachedThreshold={1}
-          onEndReached={handleEndReached}
-          ListFooterComponent={<Loader />}
-        />
-      </View>
+      {refresh
+        ? <Loader />
+        : <View style={styles.flatList}>
+          <FlatList
+            keyExtractor={(item) => item.mal_id.toString()}
+            data={films}
+            removeClippedSubviews
+            renderItem={renderItem}
+            refreshing={refresh}
+            onRefresh={handleRefresh}
+            ItemSeparatorComponent={Separator}
+            onEndReachedThreshold={1}
+            onEndReached={handleEndReached}
+            ListFooterComponent={films.length >= 25 ? <Loader /> : null}
+          />
+        </View>
+      }
     </View>
   );
 };
