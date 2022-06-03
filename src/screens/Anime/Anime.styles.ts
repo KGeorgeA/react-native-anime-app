@@ -13,12 +13,15 @@ export default StyleSheet.create({
     paddingHorizontal: 20,
   },
   titleText: {
-    fontSize: 20,
+    fontSize: 24,
   },
-  directorText: {
+  studiosText: {
     marginTop: 15,
-    fontSize: 12,
+    fontSize: 18,
     color: '#3faef3',
+  },
+  producersText: {
+    fontSize: 18,
   },
   touchableActions: {
     flexDirection: 'row',

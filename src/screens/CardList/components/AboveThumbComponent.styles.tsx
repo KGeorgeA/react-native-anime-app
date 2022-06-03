@@ -2,6 +2,7 @@ import { StyleSheet } from 'react-native';
 
 export default StyleSheet.create({
   aboveThumbContainer: {
+    display: 'none',
     width: 40,
     height: 40,
     borderRadius: 40,

@@ -4,7 +4,6 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import List from '../List/List';
 import Map from '../../screens/BlankComponents/Map';
-import Search from '../../screens/BlankComponents/Search';
 import Comments from '../../screens/BlankComponents/Comments';
 import Notifications from '../../screens/BlankComponents/Notifications';
 
@@ -40,10 +39,6 @@ const Main: React.FC = () => {
             Media: {
               focused: 'camera',
               main: 'camera-outline',
-            },
-            Search: {
-              focused: 'search',
-              main: 'search-outline',
             },
             Comments: {
               focused: 'chatbubbles',
@@ -107,12 +102,6 @@ const Main: React.FC = () => {
         name="Media"
         component={MediaNavigation}
         options={{ title: 'Media' }}
-      />
-
-      <Tab.Screen
-        name="Search"
-        component={Search}
-        options={{ title: 'Search' }}
       />
 
       <Tab.Screen

@@ -1,17 +1,18 @@
 import React, { useEffect, useMemo, useState } from 'react';
-import { View, Text, Dimensions } from 'react-native';
+import { Text, Dimensions } from 'react-native';
 import Animated, { useAnimatedStyle, withTiming } from 'react-native-reanimated';
-import DropDownPicker from 'react-native-dropdown-picker';
 import type { ValueType } from 'react-native-dropdown-picker';
 
+import DropDownPicker from 'react-native-dropdown-picker';
 import styles from './SlidingDrawer.styles';
 import TextInputs from '../../../ui/components/TextInputs';
 import CustomButton from '../../../ui/components/CustomButton';
 import CustomSlider from '../../../ui/components/CustomSlider';
-import CustomAboveThumbComponent from './AboveThumbComponent';
+// import CustomAboveThumbComponent from './AboveThumbComponent';
 
 import { useAppDispatch, useAppSelector } from '../../../utils/hooks';
 import * as Reducers from '../../../store/reducer';
+import CustomCheckbox from '../../../ui/components/CustomCheckbox';
 
 /// /////////////   //////////////////// ///
 ///  FIND DRAWER LIB or made THIS ui kit ///
@@ -96,14 +97,25 @@ const SlidingDrawer: React.FC = () => {
     setScoreSelectorValue,
   ] = useState<number[]>([animeMinScoreFilter || 0, animeMaxScoreFilter || 10]);
 
+  const [checkboxValue, setCheckboxValue] = useState<boolean>(true);
+
   const animatedFilterDrawerStyles = useAnimatedStyle(() => ({
     transform: [{translateX: isFilterDrawerShown
       ? withTiming(0, { duration: 250 })
       : withTiming(width, { duration: 250 }),
+      // : withTiming(width),
+    }],
+  }));
+
+  const animatedFilterDrawerBackground = useAnimatedStyle(() => ({
+    // display: isFilterDrawerShown ? 'flex' : 'none',  // withTiming('none', { duration: 750 }),
+    transform: [{translateX: isFilterDrawerShown
+      ? 0
+      : withTiming(width, { duration: 750 }),
     }],
     backgroundColor: isFilterDrawerShown
-      ? withTiming('rgba(0, 0, 0, 0.8)', { duration: 1250 })
-      : withTiming('transparent'),
+    ? withTiming('rgba(0, 0, 0, 0.8)', { duration: 250 })
+    : withTiming('transparent'),
   }));
 
   const handleDropDownPickerClose = () => setCurrentPicker(null);
@@ -120,6 +132,7 @@ const SlidingDrawer: React.FC = () => {
     setScoreSelectorValue([0, 10]);
     dispatch(Reducers.updateAnimeMinScoreFilter(0));
     dispatch(Reducers.updateAnimeMaxScoreFilter(10));
+    dispatch(Reducers.updateAnimeSafeForWifeFilter(true));
   };
 
   const handleApplyFilters = () => {
@@ -129,6 +142,7 @@ const SlidingDrawer: React.FC = () => {
     dispatch(Reducers.updateAnimeMinScoreFilter(scoreSelectorValue[0]));
     dispatch(Reducers.updateAnimeMaxScoreFilter(scoreSelectorValue[1]));
     dispatch(Reducers.updateAnimerRatingFilter(ratingSelectorValue));
+    dispatch(Reducers.updateAnimeSafeForWifeFilter(checkboxValue));
     dispatch(Reducers.toggleFilterDrawerView());
   };
 
@@ -141,8 +155,8 @@ const SlidingDrawer: React.FC = () => {
   }
 
   return (
-    <Animated.View style={[styles.fullFillContainer, animatedFilterDrawerStyles]}>
-      <View style={styles.container}>
+    <Animated.View style={[styles.fullFillContainer, animatedFilterDrawerBackground]}>
+      <Animated.View style={[styles.container, animatedFilterDrawerStyles]}>
         <Text style={styles.headerText}>Avaible Filters</Text>
 
         <TextInputs
@@ -170,7 +184,7 @@ const SlidingDrawer: React.FC = () => {
           // listParentContainerStyle={{}}
           // selectedItemContainerStyle={{backgroundColor: 'blue', height: 100}}
           // selectedItemLabelStyle={{backgroundColor: 'red'}}
-          containerStyle={{backgroundColor: 'red'}}
+          // containerStyle={{backgroundColor: 'red'}}
 
           onOpen={() => setCurrentPicker('genres')}
           onClose={() => setCurrentPicker(null)}
@@ -196,7 +210,7 @@ const SlidingDrawer: React.FC = () => {
           // listParentContainerStyle={{}}
           // selectedItemContainerStyle={{backgroundColor: 'blue', height: 100}}
           // selectedItemLabelStyle={{backgroundColor: 'red'}}
-          containerStyle={{backgroundColor: 'red'}}
+          // containerStyle={{backgroundColor: 'red'}}
 
           onOpen={() => setCurrentPicker('types')}
           onClose={() => setCurrentPicker(null)}
@@ -222,7 +236,7 @@ const SlidingDrawer: React.FC = () => {
           // listParentContainerStyle={{}}
           // selectedItemContainerStyle={{backgroundColor: 'blue', height: 100}}
           // selectedItemLabelStyle={{backgroundColor: 'red'}}
-          containerStyle={{backgroundColor: 'red'}}
+          // containerStyle={{backgroundColor: 'red'}}
 
           onOpen={() => setCurrentPicker('rating')}
           onClose={handleDropDownPickerClose}
@@ -242,6 +256,15 @@ const SlidingDrawer: React.FC = () => {
           zIndexInverse={300}
         />
 
+        <CustomCheckbox
+          checkboxStyle={{}}
+          checkboxContainerStyle={{}}
+          checkboxTitleStyle={{ textAlign: 'center', fontSize: 18 }}
+          checkboxValue={checkboxValue}
+          onCheckboxValueChange={(value) => setCheckboxValue(value)}
+          checkboxTitle="Safe For Wife"
+        />
+
         <CustomSlider
           initialValue={scoreSelectorValue}
           minSliderValue={0}
@@ -250,8 +273,10 @@ const SlidingDrawer: React.FC = () => {
           onValueChange={(value) => setScoreSelectorValue(value as number[])}  //  BRUH
           viewStyles={styles.sliderContainer}
           textStyle={styles.sliderText}
-          sliderText="Minimal Anime score"
-          AboveThumbComponent={CustomAboveThumbComponent}
+          sliderText={
+            `Minimal Anime score\nFrom ${scoreSelectorValue[0]} to ${scoreSelectorValue[1]}`
+          }
+          // AboveThumbComponent={CustomAboveThumbComponent}
         />
 
         <CustomButton
@@ -279,7 +304,7 @@ const SlidingDrawer: React.FC = () => {
           textStyles={styles.applyFiltersButtonText}
           buttonText="Apply filters"
         />
-      </View>
+      </Animated.View>
     </Animated.View>
   );
 };

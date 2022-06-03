@@ -1,13 +1,10 @@
 import React from 'react';
 import { View, Text, ViewStyle } from 'react-native';
 import type { StyleProp, TextStyle } from 'react-native';
-import type {
-  SliderOnChangeCallback,
-  SliderProps,
-} from '@miblanchard/react-native-slider/lib/types';
-
+import type { SliderProps } from '@miblanchard/react-native-slider/lib/types';
 import { Slider } from '@miblanchard/react-native-slider';
 
+type SliderOnChangeCallback = (value: number | Array<number>) => void
 type CustomSliderType = {
   sliderText: string;
   textStyle?: StyleProp<TextStyle>;

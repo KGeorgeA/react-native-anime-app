@@ -21,8 +21,13 @@ export const getAnimes = createAsyncThunk<
 >('posts/getAnimes', async ( params, { dispatch } ) => {
   try {
     dispatch(toggleRefresh(true));
+    const filter = params;
 
-    const { data: { data, pagination } } = await getList(params);
+    if (!params?.sfw) {
+      delete filter?.sfw;
+    }
+
+    const { data: { data, pagination } } = await getList(filter);
 
     dispatch(updateApiPagination(pagination));
     dispatch(updatePosts(data));

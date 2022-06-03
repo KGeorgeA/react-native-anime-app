@@ -70,9 +70,9 @@ const CameraScreen: React.FC = () => {
     try {
       // does not work
       captureButtonRotation.value = withSequence(
-        withTiming(-10, { duration: 500 }),
-        withRepeat(withTiming(10, { duration: 1000 }), 6, true),
-        withTiming(0, { duration: 500 }),
+        withTiming(-10, { duration: 25 }),
+        withRepeat(withTiming(10, { duration: 50 }), 6, true),
+        withTiming(0, { duration: 25 }),
       );
 
       // does not work
@@ -85,7 +85,7 @@ const CameraScreen: React.FC = () => {
 
       if (!savePermission) return null;
 
-      Vibration.vibrate();
+      Vibration.vibrate([100, 100, 100, 100]);
 
       camera.current?.takePhoto().then(async (r) => {
         await CameraRoll.save(r.path, { type: 'photo' });

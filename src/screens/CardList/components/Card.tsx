@@ -27,15 +27,17 @@ const Card: React.FC<{item: Anime}> = ({ item }) => {
           <View style={styles.infoContainer}>
             <View>
               <View style={styles.titleContainer}>
-                <Text style={[styles.text, styles.titleText]}>{item.title}</Text>
+                <Text style={[styles.text, styles.titleText]}>
+                  {item.title_english ?? item.title}
+                </Text>
               </View>
 
               <View style={styles.directorContainer}>
                 <Text style={[styles.text, styles.directorText]}>
-                  by {item.producers.map((producer, index) => (
-                    index === item.producers.length - 1
-                      ? `${producer.name}`
-                      : `${producer.name}, `
+                  by {item.studios.map((studio, index) => (
+                    index === item.studios.length - 1
+                      ? `${studio.name}`
+                      : `${studio.name}, `
                   ))}
                 </Text>
               </View>

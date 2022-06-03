@@ -38,7 +38,9 @@ const PermissionScreen: React.FC = (): React.ReactElement => {
     if (
       cameraPermissionStatus === 'authorized' &&
       microphonePermissionStatus === 'authorized'
-    ) navigation.replace('Main', { screen: 'Media', params: { screen: 'MediaScreen' } });
+    ) {
+      return navigation.replace('Main', { screen: 'Media', params: { screen: 'MediaScreen' } });
+    }
   }, [cameraPermissionStatus, microphonePermissionStatus, navigation]);
 
   return (

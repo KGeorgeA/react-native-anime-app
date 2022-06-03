@@ -11,6 +11,7 @@ import { useAppDispatch, useAppSelector } from '../../utils/hooks';
 import thunks from '../../store/thunks';
 import { updateCurrentAnime } from '../../store/reducer';
 import type { ListStackParamsList } from '../../utils/types';
+import CustomTabs from '../../ui/components/CustomTabs';
 
 const Anime: React.FC<{ route: RouteProp<ListStackParamsList, 'Anime'> }> = (props) => {
   const animeId = props.route.params.animeId;
@@ -37,16 +38,35 @@ const Anime: React.FC<{ route: RouteProp<ListStackParamsList, 'Anime'> }> = (pro
 
           <View style={styles.infoContainer}>
             <Text style={styles.titleText}>
-              {currentAnime.title}
+              {currentAnime.title_english ?? currentAnime.title}
+              <Text style={{fontSize: 14}}> ({currentAnime.title_japanese})</Text>
             </Text>
 
-            <Text style={styles.directorText}>
-              by {currentAnime.producers.map((producer, index) => (
-                index === currentAnime.producers.length - 1
+            <Text style={styles.studiosText}>
+              by {currentAnime.studios.map((studio, index) => (
+                index === currentAnime.studios.length - 1
+                ? `${studio.name}`
+                : `${studio.name}, `
+                ))}
+            </Text>
+
+            <View style={{justifyContent: 'space-between'}}>
+              <Text style={{}}>Score {currentAnime.score}</Text>
+
+              <Text style={{}}>{currentAnime.scored_by} users</Text>
+
+              <Text style={{}}>Ranked #{currentAnime.rank}</Text>
+
+              <Text style={{}}>Popularity #{currentAnime.popularity}</Text>
+
+              <Text style={{}}>
+                Producers: {currentAnime.producers.map((producer, index) => (
+                  index === currentAnime.producers.length - 1
                   ? `${producer.name}`
                   : `${producer.name}, `
-              ))}
-            </Text>
+                  ))}
+              </Text>
+            </View>
 
             <View style={styles.touchableActions}>
               <CustomButton
@@ -64,9 +84,17 @@ const Anime: React.FC<{ route: RouteProp<ListStackParamsList, 'Anime'> }> = (pro
               />
             </View>
 
+            <View>
+              <CustomTabs />
+            </View>
+
             <Text style={styles.description}>
-              {currentAnime.synopsis}
+              Synopsis:{'\n'}{currentAnime.synopsis.replace(' [', '\n[')}
             </Text>
+
+            {currentAnime.background && <Text>
+              Background:{'\n'}{currentAnime.background}
+            </Text>}
           </View>
         </ScrollView>
       </View>

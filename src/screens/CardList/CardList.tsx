@@ -14,6 +14,11 @@ import EmptyScreen from './components/EmptyScreen';
 
 const renderItem = ({ item }: RenderedItemProps) => <Card item={item} />;
 
+const INITIAL_PARAMS = {
+  sfw: true,
+  page: 1,
+};
+
 const CardList: React.FC = () => {
   const dispatch = useAppDispatch();
   const {
@@ -25,11 +30,12 @@ const CardList: React.FC = () => {
     animerRatingFilter,
     animeMinScoreFilter,
     animeMaxScoreFilter,
+    animeSafeForWifeFilter,
   } = useAppSelector(({ posts }) => posts);
   const page = useAppSelector(({ posts }) => posts.apiPagination.current_page);
 
   useEffect(() => {
-    dispatch(thunks.getAnimes());
+    dispatch(thunks.getAnimes(INITIAL_PARAMS));
     dispatch(thunks.getAllGenres());
   }, [dispatch]);
 
@@ -42,6 +48,7 @@ const CardList: React.FC = () => {
       rating: animerRatingFilter,
       min_score: animeMinScoreFilter,
       max_score: animeMaxScoreFilter,
+      sfw: animeSafeForWifeFilter ? true : undefined,
     };
 
     dispatch(thunks.getAnimes(filter));
@@ -53,6 +60,7 @@ const CardList: React.FC = () => {
     animerRatingFilter,
     animeMinScoreFilter,
     animeMaxScoreFilter,
+    animeSafeForWifeFilter,
   ]);
 
   const handleEndReached = () => dispatch(thunks.getMoreAnimes(page));

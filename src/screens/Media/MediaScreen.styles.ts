@@ -4,25 +4,25 @@ export default StyleSheet.create({
   container: {
     flex: 1,
   },
-  makePictureContainer: {
+  takePictureContainer: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
   },
-  makePictureButtonWrapper: {
+  takePictureButtonWrapper: {
     borderRadius: 10,
     backgroundColor: '#109CEB',
   },
-  makePictureButton: {
+  takePictureButton: {
     flexDirection: 'row',
     alignItems: 'center',
     paddingVertical: 3,
     paddingHorizontal: 5,
   },
-  makePictureIcon: {
+  takePictureIcon: {
     marginRight: 5,
   },
-  makePictureText: {
+  takePictureText: {
     textTransform: 'uppercase',
     textAlign: 'center',
     color: 'white',

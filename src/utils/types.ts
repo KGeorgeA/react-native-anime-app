@@ -17,7 +17,6 @@ export type AuthStackParamsList = {
 export type MainStackParamsList = {
   List: NavigatorScreenParams<ListStackParamsList> | undefined;
   Map: undefined;
-  Search: undefined;
   Comments: undefined;
   Notifications: undefined;
   Media: NavigatorScreenParams<MediaStackParamsList> | undefined;
@@ -108,7 +107,7 @@ export interface State {
   genres: GenreType[];
   isFilterDrawerShown: boolean;
   //  filters
-  animeSafeForWifeFilter?: boolean;
+  animeSafeForWifeFilter: boolean;
   animeSearchString?: string;
   animeGenresFilter: string[] | string | null;  // or enum from 70+ genres)))
   animeTypesFilter: TypesEnum | null;

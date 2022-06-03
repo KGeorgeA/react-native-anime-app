@@ -45,12 +45,17 @@ const MediaScreen: React.FC = () => {
   const getImages = async () => {
     try {
       const hasPermission = await requestReadPermission();
+
       if (!hasPermission) return [];
       CameraRoll.getPhotos({ first: 12 }).then((items) => setFlatListItems(items.edges));
     } catch (error) {
       // eslint-disable-next-line no-console
       console.log(error);
     }
+  };
+
+  const handleButtonPress = () => {
+    navigation.navigate('CameraScreen');
   };
 
   useFocusEffect(useCallback(() => {
@@ -61,30 +66,28 @@ const MediaScreen: React.FC = () => {
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.container}>
-        <View style={styles.makePictureContainer}>
-            <View style={styles.makePictureButtonWrapper}>
+        <View style={styles.takePictureContainer}>
+            <View style={styles.takePictureButtonWrapper}>
               {/* TO-DO: change this TO to CustomButton from ui kit */}
               <TouchableOpacity
-                style={styles.makePictureButton}
-                onPress={() => navigation.navigate('CameraScreen')}
+                style={styles.takePictureButton}
+                onPress={handleButtonPress}
               >
                 <Ionicons
                   name="camera"
                   size={24}
                   color="white"
-                  style={styles.makePictureIcon}
+                  style={styles.takePictureIcon}
                 />
 
-                <Text style={styles.makePictureText}>make a photo</Text>
+                <Text style={styles.takePictureText}>take a photo</Text>
               </TouchableOpacity>
             </View>
         </View>
 
         <Separator marginTop={0} height={2} />
 
-        <Galery
-          flatListData={flatListItems}
-        />
+        <Galery flatListData={flatListItems} />
       </View>
     </SafeAreaView>
   );
