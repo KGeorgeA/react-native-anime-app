@@ -1,4 +1,5 @@
 import { StyleSheet } from 'react-native';
+import CONSTANTS from '../../../utils/constants';
 
 export default StyleSheet.create({
   container: {
@@ -8,7 +9,7 @@ export default StyleSheet.create({
     padding: 10,
   },
   text: {
-    fontSize: 25,
+    fontSize: CONSTANTS.FONT_SIZES.H1,
     textAlign: 'center',
   },
   buttonTouchableOpacity: {
@@ -16,15 +17,15 @@ export default StyleSheet.create({
   },
   buttonView: {
     flexDirection: 'row',
-    backgroundColor: '#109CEB',
+    backgroundColor: CONSTANTS.COLORS.PRIMARY.MAIN,
     borderRadius: 3,
     padding: 5,
     alignItems: 'center',
   },
   buttonText: {
-    color: '#fff',
+    color: CONSTANTS.COLORS.TEXT.CONTRAST,
     textTransform: 'capitalize',
     marginLeft: 5,
-    fontSize: 20,
+    fontSize: CONSTANTS.FONT_SIZES.H2,
   },
 });

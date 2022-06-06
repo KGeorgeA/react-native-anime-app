@@ -1,7 +1,7 @@
 import React from 'react';
 import type { StyleProp, TextStyle } from 'react-native';
 
-import { ColorValue, Text} from 'react-native';
+import { ColorValue, Text } from 'react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import TouchableComponent from './TouchableComponent';
 
@@ -26,13 +26,17 @@ const CustomButton: React.FC<CustomButtonPropsType> = ({
   buttonText,
   textStyles,
 }) => {
+  const icon = <Ionicons name={iconName} size={iconSize} color={iconColor} />;
+
   return (
-    <TouchableComponent
-      {...touchableComponentProps}
-    >
-      {iconSide === 'left' && <Ionicons name={iconName} size={iconSize} color={iconColor} />}
-      <Text style={textStyles}>{buttonText}</Text>
-      {iconSide === 'right' && <Ionicons name={iconName} size={iconSize} color={iconColor} />}
+    <TouchableComponent {...touchableComponentProps}>
+      {iconSide === 'left' && icon}
+
+      <Text style={textStyles}>
+        {buttonText}
+      </Text>
+
+      {iconSide === 'right' && icon}
     </TouchableComponent>
   );
 };

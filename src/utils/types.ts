@@ -70,7 +70,8 @@ export type StatusesEnum = 'airing' | 'complete' | 'upcoming';
 
 export type RatingsEnum = 'g' | 'pg' | 'pg13' | 'r17' | 'r' | 'rx';
 
-export type OrderEnum = 'mal_id'
+export type OrderEnum =
+  'mal_id'
   | 'title'
   | 'type'
   | 'rating'
@@ -118,7 +119,10 @@ export interface State {
   animeScoreFilter?: number;
   animeMinScoreFilter: number | null;
   animeMaxScoreFilter: number | null;
-  animeStartDateFilter?: string;  //  YYYY-MM-DD
+  /**
+   * YYYY-MM-DD
+   */
+  animeStartDateFilter?: string;
   animeEndDateFilter?: string;    //  YYYY-MM-DD
 }
 

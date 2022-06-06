@@ -44,16 +44,9 @@ const postsSlice = createSlice({
     updateCurrentPage: (state, { payload }) => {
       state.apiPagination.current_page = payload;
     },
-    updateItemsCount: (state, { payload }) => ({
-      ...state,
-      apiPagination: {
-        ...state.apiPagination,
-        items: {
-          ...state.apiPagination.items,
-          count: payload,
-        },
-      },
-    }),
+    updateItemsCount: (state, { payload }) => {
+      state.apiPagination.items.count = payload;
+    },
     updateGenres: (state, { payload }) => {
       state.genres = payload;
     },

@@ -32,8 +32,8 @@ const Card: React.FC<{item: Anime}> = ({ item }) => {
                 </Text>
               </View>
 
-              <View style={styles.directorContainer}>
-                <Text style={[styles.text, styles.directorText]}>
+              <View style={styles.studioContainer}>
+                <Text style={[styles.text, styles.studioText]}>
                   by {item.studios.map((studio, index) => (
                     index === item.studios.length - 1
                       ? `${studio.name}`

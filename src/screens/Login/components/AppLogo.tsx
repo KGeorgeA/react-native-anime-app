@@ -10,7 +10,7 @@ const imageUri = {
 };
 
 const AppLogo: React.FC = () => {
-  const [logoImageUri, setLogoImageUri] = useState<string>(imageUri.guts);
+  const [logoImageUri, setLogoImageUri] = useState(imageUri.guts);
 
   const handleLongPress = () => Linking.openURL('https://myanimelist.net/');
 

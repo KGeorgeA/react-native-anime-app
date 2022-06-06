@@ -1,7 +1,9 @@
+import { ANIME_API_URL } from 'react-native-dotenv';
+
 import axios from 'axios';
 
 const customAxios = axios.create({
-  baseURL: 'https://api.jikan.moe/v4',
+  baseURL: ANIME_API_URL,
 });
 
 customAxios.interceptors.response.use(

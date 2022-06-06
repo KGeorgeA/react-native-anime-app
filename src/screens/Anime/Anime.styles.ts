@@ -1,4 +1,5 @@
 import { StyleSheet } from 'react-native';
+import CONSTANTS from '../../utils/constants';
 
 export default StyleSheet.create({
   iosContainer: {
@@ -13,15 +14,18 @@ export default StyleSheet.create({
     paddingHorizontal: 20,
   },
   titleText: {
-    fontSize: 24,
+    fontSize: CONSTANTS.FONT_SIZES.H1,
+  },
+  japaneseTitleText: {
+    fontSize: CONSTANTS.FONT_SIZES.H5,
   },
   studiosText: {
     marginTop: 15,
-    fontSize: 18,
-    color: '#3faef3',
+    fontSize: CONSTANTS.FONT_SIZES.H3,
+    color: CONSTANTS.COLORS.ACCENT,
   },
   producersText: {
-    fontSize: 18,
+    fontSize: CONSTANTS.FONT_SIZES.H3,
   },
   touchableActions: {
     flexDirection: 'row',
@@ -32,17 +36,17 @@ export default StyleSheet.create({
   },
   touchableButtons: {
     flexDirection: 'row',
-    backgroundColor: '#109CEB',
+    backgroundColor: CONSTANTS.COLORS.PRIMARY.MAIN,
     borderRadius: 3,
     padding: 5,
   },
   touchableText: {
-    color: '#fff',
+    color: CONSTANTS.COLORS.TEXT.CONTRAST,
     textTransform: 'capitalize',
     marginLeft: 5,
   },
   description: {
-    fontSize: 15,
+    fontSize: CONSTANTS.FONT_SIZES.H3,
     textAlign: 'justify',
   },
 });

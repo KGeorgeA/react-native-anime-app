@@ -1,20 +1,22 @@
-import React, { useCallback } from 'react';
+import React, { useCallback, useState } from 'react';
 import { RouteProp, useFocusEffect } from '@react-navigation/native';
 import { SafeAreaView, ScrollView, View, Text } from 'react-native';
 
+import { Tab } from '@rneui/themed';
 import styles from './Anime.styles';
 import Loader from '../Loader/Loader';
 import CustomCarousel from './components/Carousel';
 import CustomButton from './components/CustomButton';
 
+import CONSTANTS from '../../utils/constants';
 import { useAppDispatch, useAppSelector } from '../../utils/hooks';
 import thunks from '../../store/thunks';
 import { updateCurrentAnime } from '../../store/reducer';
 import type { ListStackParamsList } from '../../utils/types';
-import CustomTabs from '../../ui/components/CustomTabs';
 
 const Anime: React.FC<{ route: RouteProp<ListStackParamsList, 'Anime'> }> = (props) => {
   const animeId = props.route.params.animeId;
+  const [tabIndex, setTabIndex] = useState<number>(0);
 
   const dispatch = useAppDispatch();
   const currentAnime = useAppSelector(({ posts }) => posts.currentAnime);
@@ -37,63 +39,88 @@ const Anime: React.FC<{ route: RouteProp<ListStackParamsList, 'Anime'> }> = (pro
           <CustomCarousel imageUrl={currentAnime.images.jpg.image_url} />
 
           <View style={styles.infoContainer}>
-            <Text style={styles.titleText}>
-              {currentAnime.title_english ?? currentAnime.title}
-              <Text style={{fontSize: 14}}> ({currentAnime.title_japanese})</Text>
-            </Text>
+            <View>
+              <Text style={styles.titleText}>
+                {currentAnime.title_english ?? currentAnime.title}
+                <Text style={styles.japaneseTitleText}> ({currentAnime.title_japanese})</Text>
+              </Text>
 
-            <Text style={styles.studiosText}>
-              by {currentAnime.studios.map((studio, index) => (
-                index === currentAnime.studios.length - 1
-                ? `${studio.name}`
-                : `${studio.name}, `
+              <Text style={styles.studiosText}>
+                by {currentAnime.studios.map((studio, index) => (
+                  index === currentAnime.studios.length - 1
+                    ? `${studio.name}`
+                    : `${studio.name}, `
                 ))}
-            </Text>
+              </Text>
+            </View>
 
-            <View style={{justifyContent: 'space-between'}}>
-              <Text style={{}}>Score {currentAnime.score}</Text>
+            <View style={{ justifyContent: 'space-between' }}>
+              <Text style={{}}>
+                Score {currentAnime.score}
+              </Text>
 
-              <Text style={{}}>{currentAnime.scored_by} users</Text>
+              <Text style={{}}>
+                {currentAnime.scored_by} users
+              </Text>
 
-              <Text style={{}}>Ranked #{currentAnime.rank}</Text>
+              <Text style={{}}>
+                Ranked #{currentAnime.rank}
+              </Text>
 
-              <Text style={{}}>Popularity #{currentAnime.popularity}</Text>
+              <Text style={{}}>
+                Popularity #{currentAnime.popularity}
+              </Text>
 
               <Text style={{}}>
                 Producers: {currentAnime.producers.map((producer, index) => (
                   index === currentAnime.producers.length - 1
-                  ? `${producer.name}`
-                  : `${producer.name}, `
-                  ))}
+                    ? `${producer.name}`
+                    : `${producer.name}, `
+                ))}
               </Text>
             </View>
 
             <View style={styles.touchableActions}>
               <CustomButton
-                iconColor="#fff"
+                iconColor={CONSTANTS.COLORS.WHITE}
                 iconName="thumbs-up"
-                iconSize={18}
+                iconSize={CONSTANTS.FONT_SIZES.H3}
                 buttonText="like"
               />
 
               <CustomButton
-                iconColor="#fff"
+                iconColor={CONSTANTS.COLORS.WHITE}
                 iconName="chatbox"
-                iconSize={18}
+                iconSize={CONSTANTS.FONT_SIZES.H3}
                 buttonText="comment"
               />
             </View>
 
-            <View>
-              <CustomTabs />
-            </View>
+            <Tab
+              value={tabIndex}
+              onChange={(value) => setTabIndex(value)}
+            >
+              <Tab.Item
+                titleStyle={(active) => ({
+                  color: active ? CONSTANTS.COLORS.TEXT.CONTRAST : CONSTANTS.COLORS.TEXT.MAIN,
+                })}
+                title="Synopsis"
+              />
 
-            <Text style={styles.description}>
-              Synopsis:{'\n'}{currentAnime.synopsis.replace(' [', '\n[')}
-            </Text>
+              <Tab.Item
+                titleStyle={(active) => ({
+                  color: active ? CONSTANTS.COLORS.TEXT.CONTRAST : CONSTANTS.COLORS.TEXT.MAIN,
+                })}
+                title="Background"
+              />
+            </Tab>
 
-            {currentAnime.background && <Text>
-              Background:{'\n'}{currentAnime.background}
+            {tabIndex === 0 && <Text style={styles.description}>
+              {currentAnime.synopsis.replace(' [', '\n[')}
+            </Text>}
+
+            {tabIndex === 1 && currentAnime.background && <Text>
+              {currentAnime.background}
             </Text>}
           </View>
         </ScrollView>

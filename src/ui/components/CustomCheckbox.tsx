@@ -4,6 +4,8 @@ import type { StyleProp, ViewStyle, TextStyle } from 'react-native';
 
 import CheckBox from '@react-native-community/checkbox';
 
+import CONSTANTS from '../../utils/constants';
+
 type CustomCheckboxType = {
   checkboxContainerStyle: StyleProp<ViewStyle>;
   checkboxStyle?: StyleProp<ViewStyle>;
@@ -30,8 +32,9 @@ const CustomCheckbox: React.FC<CustomCheckboxType> = ({
           true: 'green',
           false: 'red',
         }}
-        tintColor="white"
-        onTintColor="red"
+        boxType="square"
+        tintColor="red"
+        onTintColor="green"
         onCheckColor="green"
         style={[styles.checkbox, checkboxStyle]}
         value={checkboxValue}
@@ -49,9 +52,13 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     marginVertical: 5,
   },
-  checkbox: {},
+  checkbox: {
+    height: 20,
+    width: 20,
+  },
   checkboxTitle: {
-    color: 'white',
+    marginLeft: 10,
+    color: CONSTANTS.COLORS.TEXT.CONTRAST,
   },
 });
 

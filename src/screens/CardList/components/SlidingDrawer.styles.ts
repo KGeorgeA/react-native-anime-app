@@ -1,4 +1,5 @@
 import { StyleSheet } from 'react-native';
+import CONSTANTS from '../../../utils/constants';
 
 const DRAWER_WIDTH = 300;
 
@@ -16,8 +17,8 @@ export default StyleSheet.create({
     padding: 10,
   },
   headerText: {
-    color: 'white',
-    fontSize: 24,
+    color: CONSTANTS.COLORS.TEXT.CONTRAST,
+    fontSize: CONSTANTS.FONT_SIZES.H1,
   },
   dropdownSelector: {
     marginVertical: 5,
@@ -25,9 +26,13 @@ export default StyleSheet.create({
   sliderContainer: {
     paddingVertical: 10,
   },
+  checkboxTitle: {
+    textAlign: 'center',
+    fontSize: CONSTANTS.FONT_SIZES.H3,
+  },
   sliderText: {
-    color: 'white',
-    fontSize: 18,
+    color: CONSTANTS.COLORS.TEXT.CONTRAST,
+    fontSize: CONSTANTS.FONT_SIZES.H3,
   },
   applyFiltersButtonContainer: {
     backgroundColor: '#084d77',
@@ -36,6 +41,6 @@ export default StyleSheet.create({
     alignItems: 'center',
   },
   applyFiltersButtonText: {
-    color: 'white',
+    color: CONSTANTS.COLORS.TEXT.CONTRAST,
   },
 });

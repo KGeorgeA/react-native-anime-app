@@ -1,5 +1,7 @@
 import { StyleSheet } from 'react-native';
 
+import CONSTANTS from '../../../utils/constants';
+
 export default StyleSheet.create({
   container: {
     height: 100,
@@ -9,13 +11,13 @@ export default StyleSheet.create({
   },
   input: {
     height: 40,
-    borderBottomColor: '#109CEB',
+    borderBottomColor: CONSTANTS.COLORS.PRIMARY.MAIN,
     borderBottomWidth: 1,
     marginVertical: 5,
   },
   text: {
     marginVertical: 5,
-    fontSize: 12,
+    fontSize: CONSTANTS.FONT_SIZES.H5,
     alignSelf: 'flex-end',
     textTransform: 'uppercase',
   },

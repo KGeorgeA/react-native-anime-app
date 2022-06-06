@@ -1,5 +1,7 @@
 import { StyleSheet } from 'react-native';
 
+import CONSTANTS from '../../../utils/constants';
+
 export default StyleSheet.create({
   container: {
     paddingTop: 8,
@@ -10,7 +12,7 @@ export default StyleSheet.create({
   },
   imageContainer: {
     flex: 2,
-    backgroundColor: '#cfebfc',
+    backgroundColor: CONSTANTS.COLORS.PRIMARY.LIGHT,
   },
   infoContainer: {
     flex: 3,
@@ -22,11 +24,13 @@ export default StyleSheet.create({
     height: 150,
   },
   titleContainer: {},
-  titleText: {},
-  directorContainer: {},
-  directorText: {
-    color: '#3faef3',
-    fontSize: 13,
+  titleText: {
+    fontSize: CONSTANTS.FONT_SIZES.H3,
+  },
+  studioContainer: {},
+  studioText: {
+    color: CONSTANTS.COLORS.ACCENT,
+    fontSize: CONSTANTS.FONT_SIZES.H5,
   },
   labelsContainer: {
     flexDirection: 'row',
@@ -36,13 +40,13 @@ export default StyleSheet.create({
   labelContainer: {
     width: '45%',
     paddingRight: 2,
-    backgroundColor: '#109CEB',
+    backgroundColor: CONSTANTS.COLORS.PRIMARY.MAIN,
     borderRadius: 4,
     marginRight: 5,
     marginBottom: 5,
   },
   labelText: {
-    color: 'white',
+    color: CONSTANTS.COLORS.TEXT.CONTRAST,
     textAlign: 'center',
   },
   commentsContainer: {
@@ -53,6 +57,6 @@ export default StyleSheet.create({
     marginRight: 5,
   },
   text: {
-    fontSize: 15,
+    fontSize: CONSTANTS.FONT_SIZES.H5,
   },
 });

@@ -1,5 +1,7 @@
 import { StyleSheet } from 'react-native';
 
+import CONSTANTS from '../../utils/constants';
+
 export default StyleSheet.create({
   iosContainer: {
     flex: 1,
@@ -19,13 +21,13 @@ export default StyleSheet.create({
     justifyContent: 'center',
   },
   buttonEnabled: {
-    backgroundColor: '#109CEB',
+    backgroundColor: CONSTANTS.COLORS.PRIMARY.MAIN,
   },
   buttonDisabled: {
     backgroundColor: '#d8d8d8',
   },
   text: {
     textTransform: 'uppercase',
-    color: 'white',
+    color: CONSTANTS.COLORS.TEXT.CONTRAST,
   },
 });

@@ -1,5 +1,7 @@
 import { StyleSheet } from 'react-native';
 
+import CONSTANTS from '../../utils/constants';
+
 export default StyleSheet.create({
   container: {
     flex: 1,
@@ -11,7 +13,7 @@ export default StyleSheet.create({
   },
   takePictureButtonWrapper: {
     borderRadius: 10,
-    backgroundColor: '#109CEB',
+    backgroundColor: CONSTANTS.COLORS.PRIMARY.MAIN,
   },
   takePictureButton: {
     flexDirection: 'row',
@@ -25,7 +27,7 @@ export default StyleSheet.create({
   takePictureText: {
     textTransform: 'uppercase',
     textAlign: 'center',
-    color: 'white',
+    color: CONSTANTS.COLORS.TEXT.CONTRAST,
   },
   galeryContainer: {
     flex: 4,

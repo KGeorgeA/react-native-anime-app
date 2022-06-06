@@ -8,15 +8,16 @@ import styles from './SlidingDrawer.styles';
 import TextInputs from '../../../ui/components/TextInputs';
 import CustomButton from '../../../ui/components/CustomButton';
 import CustomSlider from '../../../ui/components/CustomSlider';
+import CustomCheckbox from '../../../ui/components/CustomCheckbox';
 // import CustomAboveThumbComponent from './AboveThumbComponent';
 
+import CONSTANTS from '../../../utils/constants';
 import { useAppDispatch, useAppSelector } from '../../../utils/hooks';
 import * as Reducers from '../../../store/reducer';
-import CustomCheckbox from '../../../ui/components/CustomCheckbox';
 
-/// /////////////   //////////////////// ///
-///  FIND DRAWER LIB or made THIS ui kit ///
-/// /////////////   //////////////////// ///
+/// /////////////   /////////////////////// ///
+///  FIND DRAWER LIB or made THIS as ui kit ///
+/// /////////////   /////////////////////// ///
 
 type SelectorType = {
   label: string;
@@ -162,10 +163,10 @@ const SlidingDrawer: React.FC = () => {
         <TextInputs
           textInputPropsArray={[{
             style: {
-              backgroundColor: '#fff',
+              backgroundColor: CONSTANTS.COLORS.WHITE,
               borderRadius: 8,
               borderWidth: 1,
-              borderColor: '#000',
+              borderColor: CONSTANTS.COLORS.BLACK,
               padding: 5,
               marginVertical: 5,
             },
@@ -259,7 +260,7 @@ const SlidingDrawer: React.FC = () => {
         <CustomCheckbox
           checkboxStyle={{}}
           checkboxContainerStyle={{}}
-          checkboxTitleStyle={{ textAlign: 'center', fontSize: 18 }}
+          checkboxTitleStyle={styles.checkboxTitle}
           checkboxValue={checkboxValue}
           onCheckboxValueChange={(value) => setCheckboxValue(value)}
           checkboxTitle="Safe For Wife"

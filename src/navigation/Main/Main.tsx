@@ -6,22 +6,15 @@ import List from '../List/List';
 import Map from '../../screens/BlankComponents/Map';
 import Comments from '../../screens/BlankComponents/Comments';
 import Notifications from '../../screens/BlankComponents/Notifications';
+import HeaderRightButton from '../../ui/components/HeaderRightButton';
 
+import CONSTANTS from '../../utils/constants';
 import type { MainStackParamsList } from '../../utils/types';
 import MediaNavigation from '../Media/MediaNavigation';
-import CustomButton from '../../ui/components/CustomButton';
-import { useAppDispatch } from '../../utils/hooks';
-import { toggleFilterDrawerView } from '../../store/reducer';
 
 const Tab = createBottomTabNavigator<MainStackParamsList>();
 
 const Main: React.FC = () => {
-  const dispatch = useAppDispatch();
-
-  const toggleFilterDrawer = () => {
-    dispatch(toggleFilterDrawerView());
-  };
-
   return (
     <Tab.Navigator
       initialRouteName="List"
@@ -53,49 +46,34 @@ const Main: React.FC = () => {
           const icon = icons[route.name];
           return <Ionicons name={focused ? icon.focused : icon.main} size={size} color={color} />;
         },
-        tabBarActiveTintColor: '#109CEB',
-        tabBarInactiveTintColor: 'gray',
+        tabBarActiveTintColor: CONSTANTS.COLORS.PRIMARY.MAIN,
+        tabBarInactiveTintColor: CONSTANTS.COLORS.GRAY,
         tabBarShowLabel: false,
         tabBarHideOnKeyboard: true,
-        // header: (props) => (<Header {...props} />),
       })}
-    // tabBar={(props) => (<Footer {...props} />)}
+      // tabBar={() => {
+      //   return (
+      //     <View style={{ backgroundColor: 'lime', height: 200 }}>
+      //       <Text>
+      //         TEEEEEST
+      //       </Text>
+      //     </View>
+      //   );
+      // }}
     >
       <Tab.Screen
         name="List"
         component={List}
         options={{
           title: 'List',
-          headerRight: () => (
-            <CustomButton
-              buttonText="Filters"
-              touchableComponentProps={{
-                touchableOpacityProps: {
-                  onPress: toggleFilterDrawer,
-                  style: {
-                    marginRight: 10,
-                  },
-                },
-                viewProps: {
-                  style: {
-                    backgroundColor: '#109CEB',
-                    padding: 5,
-                  },
-                },
-              }}
-              textStyles={{
-                fontSize: 18,
-                color: 'white',
-              }}
-            />
-          ),
+          headerRight: HeaderRightButton,
         }}
       />
 
       <Tab.Screen
         name="Map"
         component={Map}
-        options={{ title: 'Map' }}
+        options={{ title: 'Map', headerShown: false, tabBarShowLabel: false }}
       />
 
       <Tab.Screen
@@ -118,4 +96,5 @@ const Main: React.FC = () => {
     </Tab.Navigator>
   );
 };
+
 export default Main;

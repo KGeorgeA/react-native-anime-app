@@ -45,18 +45,18 @@ const InputFields: React.FC<{
     <View style={styles.container}>
       <TextInputs
         textInputPropsArray={[{
-            style: styles.input,
-            placeholder: 'USERNAME',
-            autoCorrect: false,
-            value: userName,
-            onChangeText: handleUserNameChange,
-          }, {
-            style: styles.input,
-            placeholder: 'PASSWORD',
-            secureTextEntry: true,
-            autoCorrect: false,
-            value: password,
-            onChangeText: handlePasswordChange,
+          style: styles.input,
+          placeholder: 'USERNAME',
+          autoCorrect: false,
+          value: userName,
+          onChangeText: handleUserNameChange,
+        }, {
+          style: styles.input,
+          placeholder: 'PASSWORD',
+          secureTextEntry: true,
+          autoCorrect: false,
+          value: password,
+          onChangeText: handlePasswordChange,
         }]}
         inputsContainerStyles={styles.inputsContainer}
       />
@@ -66,7 +66,7 @@ const InputFields: React.FC<{
           Alert.alert(
             'Forgot your password?',
             'GRIFFIIIIIIIIIIIIIIIIIIIITH',
-            )
+          )
         }>
         <Text style={styles.text}>forgot password</Text>
       </TouchableOpacity>

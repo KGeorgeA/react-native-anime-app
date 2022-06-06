@@ -1,11 +1,13 @@
 import { StyleSheet } from 'react-native';
 import { initialWindowMetrics } from 'react-native-safe-area-context';
 
+import CONSTANTS from '../../../utils/constants';
+
 const CONTENT_SPACING = 15;
 
 export default StyleSheet.create({
   welcome: {
-    fontSize: 24,
+    fontSize: CONSTANTS.FONT_SIZES.H1,
     fontWeight: 'bold',
     maxWidth: '80%',
     textAlign: 'justify',
@@ -18,7 +20,7 @@ export default StyleSheet.create({
   },
   container: {
     flex: 1,
-    backgroundColor: 'white',
+    backgroundColor: CONSTANTS.COLORS.WHITE,
     paddingLeft: initialWindowMetrics!.insets.left + CONTENT_SPACING,
     paddingRight: initialWindowMetrics!.insets.right + CONTENT_SPACING,
   },
@@ -26,7 +28,7 @@ export default StyleSheet.create({
     marginTop: CONTENT_SPACING * 2,
   },
   permissionText: {
-    fontSize: 17,
+    fontSize: CONSTANTS.FONT_SIZES.H3,
   },
   hyperlink: {
     color: '#007aff',

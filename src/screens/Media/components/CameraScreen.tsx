@@ -93,6 +93,7 @@ const CameraScreen: React.FC = () => {
     } catch (error) {
       // eslint-disable-next-line no-console
       console.log(error);
+      throw Error(error as string);
     }
   };
 

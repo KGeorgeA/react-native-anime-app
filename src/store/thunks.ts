@@ -18,7 +18,7 @@ export const getAnimes = createAsyncThunk<
   void,
   GetParams | undefined,
   { dispatch: AppDispatch }
->('posts/getAnimes', async ( params, { dispatch } ) => {
+>('posts/getAnimes', async (params, { dispatch }) => {
   try {
     dispatch(toggleRefresh(true));
     const filter = params;
@@ -31,9 +31,8 @@ export const getAnimes = createAsyncThunk<
 
     dispatch(updateApiPagination(pagination));
     dispatch(updatePosts(data));
-  } catch (error) {
-    dispatch(toggleRefresh(false));
-    throw Error(error as string);
+  } catch {
+    //
   } finally {
     dispatch(toggleRefresh(false));
   }
@@ -56,7 +55,7 @@ export const getMoreAnimes = createAsyncThunk<
           data,
           pagination,
         },
-      } = await getList({page: apiPagination.current_page + 1, limit: 25});
+      } = await getList({ page: apiPagination.current_page + 1, limit: 25 });
 
       dispatch(updateCurrentPage(pagination.current_page));
       dispatch(updateItemsCount(pagination.items.count + apiPagination.items.count));
@@ -81,17 +80,17 @@ export const getAnime = createAsyncThunk(
 
 export const getAllGenres = createAsyncThunk(
   'posts/getAllGenres',
- async (_, { dispatch }) => {
-   try {
+  async (_, { dispatch }) => {
+    try {
       const { data: { data } } = await getGenres();
       const filteredData = data.filter((genre, genrePosition, genresArray) => {
         return genresArray.findIndex((g) => g.mal_id === genre.mal_id) === genrePosition;
       });
       dispatch(updateGenres(filteredData));
-   } catch (error) {
-     throw Error(error as string);
-   }
- },
+    } catch (error) {
+      throw Error(error as string);
+    }
+  },
 );
 
 export default {

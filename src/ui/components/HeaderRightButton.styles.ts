@@ -1,20 +1,16 @@
 import { StyleSheet } from 'react-native';
-
-import CONSTANTS from '../../../utils/constants';
+import CONSTANTS from '../../utils/constants';
 
 export default StyleSheet.create({
-  touchableOpacity: {
+  buttonTouchableOpacity: {
     marginRight: 10,
   },
-  touchableButtons: {
-    flexDirection: 'row',
+  buttonView: {
     backgroundColor: CONSTANTS.COLORS.PRIMARY.MAIN,
-    borderRadius: 3,
     padding: 5,
   },
-  touchableText: {
+  buttonText: {
+    fontSize: CONSTANTS.FONT_SIZES.H3,
     color: CONSTANTS.COLORS.TEXT.CONTRAST,
-    textTransform: 'capitalize',
-    marginLeft: 5,
   },
 });
