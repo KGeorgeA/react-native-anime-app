@@ -10,7 +10,7 @@ import CameraRoll from '@react-native-community/cameraroll';
 
 import Modal from 'react-native-modal';
 import styles, { IMAGE_COUNT } from './Galery.styles';
-import TouchableComponent from '../../../ui/components/TouchableComponent';
+import AppTouchableComponent from '../../../ui/components/AppTouchableComponent';
 
 type GaleryType = {
   flatListData: CameraRoll.PhotoIdentifier[];
@@ -29,14 +29,14 @@ const Galery: React.FC<GaleryType> = ({ flatListData }) => {
     const toggleModalRef = () => toggleModal.current(item.node.image.uri);
 
     return (
-      <TouchableComponent
+      <AppTouchableComponent
         touchableOpacityProps={{
           onPress: toggleModalRef,
         }}
         viewProps={{ style: styles.flatListItem }}
       >
         <Image source={{uri: item.node.image.uri}} style={styles.flatListItemImage}/>
-      </TouchableComponent>
+      </AppTouchableComponent>
     );
   };
 

@@ -1,3 +1,5 @@
+import type { ReactNode} from 'react';
+import type { StyleProp, TextStyle } from 'react-native';
 import type { NavigatorScreenParams } from '@react-navigation/native';
 import type { NativeStackNavigationProp } from '@react-navigation/native-stack';
 
@@ -93,7 +95,7 @@ export interface RenderedItemProps {
   item: Anime;
 }
 
-export interface CustomButtonProps {
+export interface AppButtonProps {
   iconName: string;
   iconColor: string;
   iconSize: number;
@@ -106,11 +108,11 @@ export interface State {
   currentAnime: Anime | null;
   apiPagination: APIPagination;
   genres: GenreType[];
+  // Filters
   isFilterDrawerShown: boolean;
-  //  filters
   animeSafeForWifeFilter: boolean;
   animeSearchString?: string;
-  animeGenresFilter: string[] | string | null;  // or enum from 70+ genres)))
+  animeGenresFilter: string[] | string | null;
   animeTypesFilter: TypesEnum | null;
   animerRatingFilter: RatingsEnum | null;
   animeSortFilter: OrderEnum | null;
@@ -120,11 +122,23 @@ export interface State {
   animeMinScoreFilter: number | null;
   animeMaxScoreFilter: number | null;
   /**
-   * YYYY-MM-DD
+   * @param animeStartDateFilter contains the date in the format 'YYYY-MM-DD'
    */
   animeStartDateFilter?: string;
-  animeEndDateFilter?: string;    //  YYYY-MM-DD
+  /**
+   * @param animeEndDateFilter contains the date in the format 'YYYY-MM-DD'
+   */
+  animeEndDateFilter?: string;
+  // Permissions
+  cameraPermission: unknown;
+  microPermission: unknown;
+  readStoragePermission: unknown;
+  writeStoragePermission: unknown;
 }
+/*
+  type CameraPermissionStatus
+  type CameraPermissionRequestResult
+*/
 
 export type APIPagination = {
   current_page: number;
@@ -206,3 +220,43 @@ type AnimeNestedRelationType = Array<{
   name: string;
   url: string;
 }>;
+
+export type AppTextProps = {
+  /**
+   * Text))
+   */
+  children: ReactNode;
+  /**
+   * Any text style. (Even fontSize and fontFamily. If so, overrides:
+   *
+   * @param textFont
+   * @param textSize
+   */
+  textStyles?: StyleProp<TextStyle>;
+  /**
+   * @param textFont
+   *
+   * japanFont - 'Noto Sans JP' which is used only for Japan language.
+   *
+   * commonFont - 'Source Sans Pro' which is used for common text like paragraphs.
+   *
+   * headerFont - 'Joan' which is used for screen's h1.
+   */
+  textFont?: FontFamilyType;
+  /**
+   * H1: 24;
+   *
+   * H2: 20;
+   *
+   * H3: 18;
+   *
+   * H4: 15;
+   *
+   * H5: 13;
+   *
+   * H6: 10;
+   */
+  textSize?: 'H1' | 'H2' | 'H3' | 'H4' | 'H5' | 'H6';
+}
+
+type FontFamilyType = 'japanFont' | 'commonFont' | 'headerFont';

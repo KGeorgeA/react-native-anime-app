@@ -14,9 +14,12 @@ export default StyleSheet.create({
     paddingHorizontal: 20,
   },
   titleText: {
+    fontFamily: 'Joan',
     fontSize: CONSTANTS.FONT_SIZES.H1,
   },
   japaneseTitleText: {
+    // fontFamily: "'Noto Sans JP', sans-serif",
+    fontFamily: 'Noto Sans JP',
     fontSize: CONSTANTS.FONT_SIZES.H5,
   },
   studiosText: {
@@ -29,7 +32,7 @@ export default StyleSheet.create({
   },
   touchableActions: {
     flexDirection: 'row',
-    padding: 15,
+    paddingVertical: 8,
   },
   touchableOpacity: {
     marginRight: 10,
@@ -46,6 +49,7 @@ export default StyleSheet.create({
     marginLeft: 5,
   },
   description: {
+    fontFamily: 'Source Sans Pro',
     fontSize: CONSTANTS.FONT_SIZES.H3,
     textAlign: 'justify',
   },

@@ -23,9 +23,16 @@ const FONT_SIZES = {
   H6: 10,
 };
 
+const FONTS = {
+  japanFont: 'Noto Sans JP',
+  commonFont: 'Source Sans Pro',
+  headerFont: 'Joan',
+};
+
 const CONSTANTS = {
   COLORS,
   FONT_SIZES,
+  FONTS,
 };
 
-export default  CONSTANTS;
+export default CONSTANTS;

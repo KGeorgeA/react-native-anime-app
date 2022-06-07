@@ -7,7 +7,7 @@ import {
 } from 'react-native';
 import { useFocusEffect } from '@react-navigation/native';
 
-import TextInputs from '../../../ui/components/TextInputs';
+import AppTextInputs from '../../../ui/components/AppTextInputs';
 import styles from './InputFields.styles';
 
 const InputFields: React.FC<{
@@ -43,7 +43,7 @@ const InputFields: React.FC<{
 
   return (
     <View style={styles.container}>
-      <TextInputs
+      <AppTextInputs
         textInputPropsArray={[{
           style: styles.input,
           placeholder: 'USERNAME',

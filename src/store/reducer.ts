@@ -13,6 +13,7 @@ const initialState: State = {
       count: 25,
     },
   },
+  // Filters
   isFilterDrawerShown: false,
   animeSearchString: '',
   animeGenresFilter: null,
@@ -23,6 +24,11 @@ const initialState: State = {
   animeSortDirection: 'asc',
   animeSafeForWifeFilter: true,
   animeSortFilter: 'title',
+  // Permissions
+  cameraPermission: '',
+  microPermission: '',
+  readStoragePermission: '',
+  writeStoragePermission: '',
 };
 
 const postsSlice = createSlice({

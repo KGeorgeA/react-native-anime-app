@@ -1,10 +1,10 @@
 import React from 'react';
 
 import styles from './HeaderRightButton.styles';
-import CustomButton from '../../../ui/components/CustomButton';
+import AppButton from './AppButton';
 
-import { useAppDispatch } from '../../../utils/hooks';
-import { toggleFilterDrawerView } from '../../../store/reducer';
+import { useAppDispatch } from '../../utils/hooks';
+import { toggleFilterDrawerView } from '../../store/reducer';
 
 const HeaderRightButton: React.FC = () => {
   const dispatch = useAppDispatch();
@@ -14,7 +14,7 @@ const HeaderRightButton: React.FC = () => {
   };
 
   return (
-    <CustomButton
+    <AppButton
     buttonText="Filters"
     touchableComponentProps={{
       touchableOpacityProps: {

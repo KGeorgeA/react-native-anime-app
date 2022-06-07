@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { AppDispatch, RootState } from './store';
 import {
@@ -62,7 +63,8 @@ export const getMoreAnimes = createAsyncThunk<
       dispatch(updatePosts(films.concat(data)));
     }
   } catch (error) {
-    throw Error(error as string);
+    console.log(error);
+    throw error;
   }
 });
 
@@ -73,7 +75,8 @@ export const getAnime = createAsyncThunk(
       const { data: { data } } = await getOne(id);
       dispatch(updateCurrentAnime(data));
     } catch (error) {
-      throw Error(error as string);
+      console.log(error);
+      throw error;
     }
   },
 );
@@ -88,7 +91,8 @@ export const getAllGenres = createAsyncThunk(
       });
       dispatch(updateGenres(filteredData));
     } catch (error) {
-      throw Error(error as string);
+      console.log(error);
+      throw error;
     }
   },
 );

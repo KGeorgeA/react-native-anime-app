@@ -2,7 +2,7 @@ import React from 'react';
 import { View, Text } from 'react-native';
 
 import styles from './EmptyScreen.styles';
-import CustomButton from '../../../ui/components/CustomButton';
+import AppButton from '../../../ui/components/AppButton';
 
 import { useAppDispatch } from '../../../utils/hooks';
 import * as Reducers from '../../../store/reducer';
@@ -25,7 +25,7 @@ const EmptyScreen: React.FC = () => {
         Unfortunately, according to your request, we have not found anything.
       </Text>
 
-      <CustomButton
+      <AppButton
         touchableComponentProps={{
           touchableOpacityProps: {
             onPress: handleResetFilters,

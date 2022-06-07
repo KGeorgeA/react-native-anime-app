@@ -5,10 +5,10 @@ import type { ValueType } from 'react-native-dropdown-picker';
 
 import DropDownPicker from 'react-native-dropdown-picker';
 import styles from './SlidingDrawer.styles';
-import TextInputs from '../../../ui/components/TextInputs';
-import CustomButton from '../../../ui/components/CustomButton';
-import CustomSlider from '../../../ui/components/CustomSlider';
-import CustomCheckbox from '../../../ui/components/CustomCheckbox';
+import AppTextInputs from '../../../ui/components/AppTextInputs';
+import AppButton from '../../../ui/components/AppButton';
+import AppSlider from '../../../ui/components/AppSlider';
+import AppCheckbox from '../../../ui/components/AppCheckbox';
 // import CustomAboveThumbComponent from './AboveThumbComponent';
 
 import CONSTANTS from '../../../utils/constants';
@@ -160,7 +160,7 @@ const SlidingDrawer: React.FC = () => {
       <Animated.View style={[styles.container, animatedFilterDrawerStyles]}>
         <Text style={styles.headerText}>Avaible Filters</Text>
 
-        <TextInputs
+        <AppTextInputs
           textInputPropsArray={[{
             style: {
               backgroundColor: CONSTANTS.COLORS.WHITE,
@@ -181,7 +181,7 @@ const SlidingDrawer: React.FC = () => {
 
         <DropDownPicker
           // placeholderStyle={{}}
-          // searchTextInputStyle={{}}
+          // searchAppTextInputstyle={{}}
           // listParentContainerStyle={{}}
           // selectedItemContainerStyle={{backgroundColor: 'blue', height: 100}}
           // selectedItemLabelStyle={{backgroundColor: 'red'}}
@@ -207,7 +207,7 @@ const SlidingDrawer: React.FC = () => {
 
         <DropDownPicker
           // placeholderStyle={{}}
-          // searchTextInputStyle={{}}
+          // searchAppTextInputstyle={{}}
           // listParentContainerStyle={{}}
           // selectedItemContainerStyle={{backgroundColor: 'blue', height: 100}}
           // selectedItemLabelStyle={{backgroundColor: 'red'}}
@@ -233,7 +233,7 @@ const SlidingDrawer: React.FC = () => {
 
         <DropDownPicker
           // placeholderStyle={{}
-          // searchTextInputStyle={{}}
+          // searchAppTextInputstyle={{}}
           // listParentContainerStyle={{}}
           // selectedItemContainerStyle={{backgroundColor: 'blue', height: 100}}
           // selectedItemLabelStyle={{backgroundColor: 'red'}}
@@ -257,7 +257,7 @@ const SlidingDrawer: React.FC = () => {
           zIndexInverse={300}
         />
 
-        <CustomCheckbox
+        <AppCheckbox
           checkboxStyle={{}}
           checkboxContainerStyle={{}}
           checkboxTitleStyle={styles.checkboxTitle}
@@ -266,7 +266,7 @@ const SlidingDrawer: React.FC = () => {
           checkboxTitle="Safe For Wife"
         />
 
-        <CustomSlider
+        <AppSlider
           initialValue={scoreSelectorValue}
           minSliderValue={0}
           maxSliderValue={10}
@@ -280,7 +280,7 @@ const SlidingDrawer: React.FC = () => {
           // AboveThumbComponent={CustomAboveThumbComponent}
         />
 
-        <CustomButton
+        <AppButton
           touchableComponentProps={{
             viewProps: {
               style: [styles.applyFiltersButtonContainer, { marginBottom: 10 }],
@@ -293,7 +293,7 @@ const SlidingDrawer: React.FC = () => {
           buttonText="Reset Filters"
         />
 
-        <CustomButton
+        <AppButton
           touchableComponentProps={{
             viewProps: {
               style: styles.applyFiltersButtonContainer,

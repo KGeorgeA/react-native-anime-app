@@ -7,7 +7,7 @@ import styles from './Login.styles';
 import AppLogo from './components/AppLogo';
 import InputFields from './components/InputFields';
 
-import CustomButton from '../../ui/components/CustomButton';
+import AppButton from '../../ui/components/AppButton';
 import type { RootStackParamsList } from '../../utils/types';
 
 const Login: React.FC = () => {
@@ -23,7 +23,7 @@ const Login: React.FC = () => {
 
         <InputFields setIsButtonDisabled={setIsButtonDisabled} />
 
-        <CustomButton
+        <AppButton
           touchableComponentProps={{
             touchableOpacityProps: {
               disabled: isButtonDisabled,

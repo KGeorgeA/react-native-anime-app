@@ -30,6 +30,9 @@
 		<string>Octicons.ttf</string>
 		<string>SimpleLineIcons.ttf</string>
 		<string>Zocial.ttf</string>
+		<string>Joan-Regular.ttf</string>
+		<string>NotoSansJP-Light.otf</string>
+		<string>SourceSansPro-Light.ttf</string>
 	</array>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>

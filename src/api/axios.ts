@@ -8,10 +8,10 @@ const customAxios = axios.create({
 
 customAxios.interceptors.response.use(
   (data) => data,
-  (err) => {
+  (error) => {
     // eslint-disable-next-line no-console
-    console.log('OSHIBKA', err);
-    throw Error(err);
+    console.log('OSHIBKA', error);
+    throw error;
   },
 );
 

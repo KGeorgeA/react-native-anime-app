@@ -1,11 +1,11 @@
 import React from 'react';
 
 import styles from './AboveThumbComponent.styles';
-import TextInputs from '../../../ui/components/TextInputs';
+import AppTextInputs from '../../../ui/components/AppTextInputs';
 
 const CustomAboveThumbComponent = (value: number) => {
   return (
-    <TextInputs
+    <AppTextInputs
       inputsContainerStyles={styles.aboveThumbContainer}
       textInputPropsArray={[
         {

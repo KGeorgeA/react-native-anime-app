@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Image, Linking } from 'react-native';
 
 import styles from './AppLogo.styles';
-import TouchableComponent from '../../../ui/components/TouchableComponent';
+import AppTouchableComponent from '../../../ui/components/AppTouchableComponent';
 
 const imageUri = {
   guts: 'https://i.pinimg.com/750x/18/e3/4e/18e34e354c421ffb316f25d96d7673f8.jpg',
@@ -19,7 +19,7 @@ const AppLogo: React.FC = () => {
   };
 
   return (
-    <TouchableComponent
+    <AppTouchableComponent
       touchableOpacityProps={{
         activeOpacity: 1,
         onLongPress: handleLongPress,
@@ -33,7 +33,7 @@ const AppLogo: React.FC = () => {
         style={styles.image}
         source={{ uri: logoImageUri }}
       />
-    </TouchableComponent>
+    </AppTouchableComponent>
   );
 };
 

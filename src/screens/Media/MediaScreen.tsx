@@ -13,10 +13,10 @@ import type { NativeStackNavigationProp } from '@react-navigation/native-stack';
 
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import styles from './MediaScreen.styles';
+import Galery from './components/Galery';
 import Separator from '../../ui/components/Separator';
 
 import type { MediaStackParamsList } from '../../utils/types';
-import Galery from './components/Galery';
 
 const requestReadPermission = async (): Promise<boolean> => {
   if (Platform.OS !== 'android') return true;
@@ -51,7 +51,7 @@ const MediaScreen: React.FC = () => {
     } catch (error) {
       // eslint-disable-next-line no-console
       console.log(error);
-      throw Error(error as string);
+      throw error;
     }
   };
 
@@ -69,7 +69,7 @@ const MediaScreen: React.FC = () => {
       <View style={styles.container}>
         <View style={styles.takePictureContainer}>
             <View style={styles.takePictureButtonWrapper}>
-              {/* TO-DO: change this TO to CustomButton from ui kit */}
+              {/* TO-DO: change this TO to AppButton from ui kit */}
               <TouchableOpacity
                 style={styles.takePictureButton}
                 onPress={handleButtonPress}

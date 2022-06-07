@@ -6,7 +6,7 @@ import { Tab } from '@rneui/themed';
 import styles from './Anime.styles';
 import Loader from '../Loader/Loader';
 import CustomCarousel from './components/Carousel';
-import CustomButton from './components/CustomButton';
+import AppButton from '../../ui/components/AppButton';
 
 import CONSTANTS from '../../utils/constants';
 import { useAppDispatch, useAppSelector } from '../../utils/hooks';
@@ -81,22 +81,41 @@ const Anime: React.FC<{ route: RouteProp<ListStackParamsList, 'Anime'> }> = (pro
             </View>
 
             <View style={styles.touchableActions}>
-              <CustomButton
+              <AppButton
+                touchableComponentProps={{
+                  touchableOpacityProps: {
+                    style: styles.touchableOpacity,
+                  },
+                  viewProps: {
+                    style: styles.touchableButtons,
+                  },
+                }}
                 iconColor={CONSTANTS.COLORS.WHITE}
                 iconName="thumbs-up"
                 iconSize={CONSTANTS.FONT_SIZES.H3}
                 buttonText="like"
+                textStyles={styles.touchableText}
               />
 
-              <CustomButton
+              <AppButton
+                touchableComponentProps={{
+                  touchableOpacityProps: {
+                    style: styles.touchableOpacity,
+                  },
+                  viewProps: {
+                    style: styles.touchableButtons,
+                  },
+                }}
                 iconColor={CONSTANTS.COLORS.WHITE}
                 iconName="chatbox"
                 iconSize={CONSTANTS.FONT_SIZES.H3}
                 buttonText="comment"
+                textStyles={styles.touchableText}
               />
             </View>
 
             <Tab
+              containerStyle={{ height: 50, marginVertical: 8 }}
               value={tabIndex}
               onChange={(value) => setTabIndex(value)}
             >
@@ -115,13 +134,19 @@ const Anime: React.FC<{ route: RouteProp<ListStackParamsList, 'Anime'> }> = (pro
               />
             </Tab>
 
-            {tabIndex === 0 && <Text style={styles.description}>
-              {currentAnime.synopsis.replace(' [', '\n[')}
-            </Text>}
+            <View style={{paddingVertical: 8}}>
+              {tabIndex === 0 &&
+                <Text style={styles.description}>
+                  {currentAnime.synopsis.replace(' [', '\n[')}
+                </Text>
+              }
 
-            {tabIndex === 1 && currentAnime.background && <Text>
-              {currentAnime.background}
-            </Text>}
+              {tabIndex === 1 && currentAnime.background &&
+                <Text>
+                  {currentAnime.background}
+                </Text>
+              }
+            </View>
           </View>
         </ScrollView>
       </View>
